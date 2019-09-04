@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const generatePassword = require('password-generator');
+const lookupWrapper = require('./api-calls/lookupWrapper')
 
 const app = express();
 
@@ -21,6 +22,16 @@ app.get('/api/passwords', (req, res) => {
 
   console.log(`Sent ${count} passwords`);
 });
+
+app.get('/api/lookup', (req, res) => {
+  lookupWrapper.make_API_call('https://jsonplaceholder.typicode.com/todos/1')
+  .then(response => {
+      res.json(response)
+  })
+  .catch(error => {
+      res.send(error)
+  })
+})
 
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
