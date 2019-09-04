@@ -24,7 +24,7 @@ app.get('/api/passwords', (req, res) => {
 });
 
 app.get('/api/lookup', (req, res) => {
-  lookupWrapper.make_API_call('https://jsonplaceholder.typicode.com/todos/1')
+  lookupWrapper.make_API_call("https://api.estated.com/property/v3?token=LjBmdE0uCvAiNppmi2nwE7tcbCM6EV&address=107+Canal+Crossing&city=Stewartsville&state=NJ&zip=08886")
   .then(response => {
       res.json(response)
   })

@@ -10,7 +10,8 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  Badge
+  Badge,
+  FormFeedback
 } from "shards-react";
 
 import {
@@ -33,14 +34,35 @@ class Landing extends React.Component {
       password : '',
       username : '',
       date: "29 February 2019",
-      validLogin : false
+      validLogin : false,
+      firstTry : true
     };
   }
 
-  handleClick = () => {
+  handlePassChange = (e) => {
     this.setState({
-      validLogin : true
-    })
+      password : e.target.value
+    });
+  }
+
+  handleUserChange = (e) => {
+    this.setState({
+      username : e.target.value
+    });
+  }
+
+  handleClick = () => {
+    if(this.state.password.length > 0 && this.state.username.length > 0){
+      this.setState({
+        validLogin : true,
+        firstTry : false
+      });
+    }else{
+      this.setState({
+        validLogin : false,
+        firstTry : false
+      });
+    }
   }
 
   shouldLogin = () => {
@@ -57,24 +79,30 @@ class Landing extends React.Component {
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
           <Row>
             <Col className="text-center">
-              <Card className="px-3">
+              <Card large className="px-3">
                 <CardHeader className="border-bottom">
+                  <h7 className="m-0">Welcome to</h7>
                   <h5 className="m-0">Restricted Reports</h5>
                 </CardHeader>
 
                 <ListGroup flush>
-                  <ListGroupItem className="px-3">
+                  
+                  <ListGroupItem className="">
                     <img src={this.state.backgroundImage} width="100" height="100" style={{animation: 'rotation 30s infinite linear'}} />
                   </ListGroupItem>
-                  <ListGroupItem className="px-3">
-
-                    <InputGroup seamless className="mb-3">
+                  
+                  <ListGroupItem className="">
+                    
+                    <InputGroup seamless className="mb-3 mt-1">
                       <InputGroupAddon type="prepend">
                         <InputGroupText>
                           <i className="material-icons">person</i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <FormInput placeholder="username" onChange={() => { }} />
+
+                      {(this.state.validLogin === false && this.state.firstTry === false) ? (<FormInput invalid placeholder="username" id='user' onChange={this.handleUserChange} />) : 
+                      (<FormInput placeholder="username" id='user' onChange={this.handleUserChange} />)}
+                      
                     </InputGroup>
 
                     <InputGroup seamless className="mb-3">
@@ -83,10 +111,12 @@ class Landing extends React.Component {
                           <i className="material-icons">lock</i>
                         </InputGroupText>
                       </InputGroupAddon>
-                      <FormInput type="password" placeholder="password" onChange={() => { }} />
+
+                      {(this.state.validLogin === false && this.state.firstTry === false) ? (<FormInput invalid id='pass' type="password" placeholder="password" onChange={this.handlePassChange}/>) :
+                      (<FormInput type="password" id='pass' placeholder="password" onChange={this.handlePassChange}/>)}
                     </InputGroup>
 
-                    <Button onClick={this.handleClick}>Login</Button>
+                    <Button className="mb-1" onClick={this.handleClick}>Login</Button>
                   </ListGroupItem>
                 </ListGroup>
 

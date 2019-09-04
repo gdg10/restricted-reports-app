@@ -1,5 +1,3 @@
-/* eslint jsx-a11y/anchor-is-valid: 0 */
-
 import React from "react";
 import {
   Container,
@@ -14,7 +12,7 @@ import {
 
 import PageTitle from "../components/common/PageTitle";
 
-class BlogPosts extends React.Component {
+class PropertyLookup extends React.Component {
   constructor(props) {
     super(props);
 
@@ -27,7 +25,7 @@ class BlogPosts extends React.Component {
       <Container fluid className="main-content-container px-4">
         {/* Page Header */}
         <Row noGutters className="page-header py-4">
-          <PageTitle sm="4" title="Reports" subtitle="Drafts & Published" className="text-sm-left" />
+          <PageTitle sm="4" title="Property Lookup" subtitle="Estated API" className="text-sm-left" />
         </Row>
 
       </Container>
@@ -35,4 +33,4 @@ class BlogPosts extends React.Component {
   }
 }
 
-export default BlogPosts;
+export default PropertyLookup;

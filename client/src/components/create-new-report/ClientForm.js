@@ -19,16 +19,29 @@ class ClientForm extends React.Component {
         super(props);
         this.state = {
             valid: false,
-            name: ''
+            name: '',
+            passwords : ["sdf"]
         }
-
+        
         // this.handleChange = this.handleChange.bind(this);
         // this.handleAdd = this.handleAdd.bind(this);
     }
 
 
+//   // Fetch passwords after first mount
+  componentDidMount() {
+    this.getPasswords();
+  }
+
+  getPasswords = () => {
+    // Get the passwords and store them in state
+    fetch('/api/passwords')
+      .then(res => res.json())
+      .then(passwords => this.setState({ passwords : passwords }));
+  }
+
+
    handleAdd = (e) => {
-        // e.preventDefault();
         let isValid = false;
         if (this.state.name.length > 0) {
             isValid = true;

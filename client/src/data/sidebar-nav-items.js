@@ -16,6 +16,11 @@ export default function() {
       htmlBefore: '<i class="material-icons">vertical_split</i>',
       to: "/reports",
     },
+    {
+      title: "Property Lookup",
+      htmlBefore: '<i class="material-icons">view_module</i>',
+      to: "/property-lookup",
+    },
     // {
     //   title: "Add New Post",
     //   htmlBefore: '<i class="material-icons">note_add</i>',

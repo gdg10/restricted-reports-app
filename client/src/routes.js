@@ -14,6 +14,7 @@ import Tables from "./views/Tables";
 import BlogPosts from "./views/BlogPosts";
 import ReportWizard from "./views/ReportWizard";
 import Landing from "./views/Landing";
+import PropertyLookup from "./views/PropertyLookup";
 
 export default [
   {
@@ -42,6 +43,11 @@ export default [
     path: "/report-wizard",
     layout: DefaultLayout,
     component: ReportWizard
+  },
+  {
+    path: "/property-lookup",
+    layout: DefaultLayout,
+    component: PropertyLookup
   },
   // {
   //   path: "/add-new-post",

@@ -37,7 +37,7 @@ const ReportWizard = () => (
       <Row noGutters className="page-header py-4">
         <PageTitle
           sm="4"
-          title="Create Report"
+          title="Create"
           subtitle="Report Wizard"
           className="text-sm-left"
         />
