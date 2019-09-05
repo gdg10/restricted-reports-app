@@ -13,6 +13,9 @@ import {
     Button
 } from "shards-react";
 
+import { addClient } from "../../redux/actions";
+import { connect } from "react-redux";
+
 class ClientForm extends React.Component {
 
     constructor(props) {
@@ -45,6 +48,7 @@ class ClientForm extends React.Component {
         let isValid = false;
         if (this.state.name.length > 0) {
             isValid = true;
+            this.props.dispatch(addClient(this.state.name));
         }
 
         this.setState({
@@ -96,4 +100,4 @@ class ClientForm extends React.Component {
     }
 }
 
-export default ClientForm;
+export default connect()(ClientForm);
