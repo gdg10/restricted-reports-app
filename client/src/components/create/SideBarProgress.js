@@ -11,13 +11,30 @@ import {
   Button,
   Progress
 } from "shards-react";
+import PropertyLookup from "../../views/PropertyLookup";
 
 class SidebarProgress extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
-    };
+      completion : 0,
+      clientComplete : false
+    }
+  }
+
+  static getDerivedStateFromProps(props){
+    if(props.client === ''){
+      return({
+        completion : 0,
+        clientComplete : false
+      });
+    }
+    else{
+      return ({
+        completion : 100,
+        clientComplete : true
+      })
+    }
   }
 
   render() {
@@ -36,8 +53,8 @@ class SidebarProgress extends React.Component {
                 <strong className="text-muted d-block mb-2">
                   Completion
                 </strong>
-                <Progress className="progress-sm" value="25">
-                  <span className="progress-value"> 25% </span>
+                <Progress className="progress-sm" value={this.state.completion}>
+                  <span className="progress-value"> {this.state.completion}% </span>
                 </Progress>
               </div>
             </ListGroupItem>
@@ -47,13 +64,13 @@ class SidebarProgress extends React.Component {
               <span className="d-flex mb-2">
                 <i className="material-icons mr-1">visibility</i>
                 <strong className="mr-1">Client:</strong>{" "}
-                <strong className="text-warning">Incomplete</strong>{" "}
+                <strong className={this.state.clientComplete ? "text-success" : "text-warning"}>{this.state.clientComplete ? "Complete" : "Incomplete"}</strong>{" "}
                 <a className="ml-auto" href="#">
                   Edit
               </a>
               </span>
 
-              <span className="d-flex mb-2">
+              {/* <span className="d-flex mb-2">
                 <i className="material-icons mr-1">visibility</i>
                 <strong className="mr-1">Subject:</strong>{" "}
                 <strong className="text-warning">Incomplete</strong>{" "}
@@ -132,7 +149,7 @@ class SidebarProgress extends React.Component {
                 <a className="ml-auto" href="#">
                   Edit
               </a>
-              </span>
+              </span> */}
 
 
             </ListGroupItem>
@@ -153,4 +170,10 @@ class SidebarProgress extends React.Component {
   }
 }
 
-export default connect()(SidebarProgress);
+const mapStateToProps = (state) => {
+  return ({
+    client: state.report.client
+  })
+}
+
+export default connect(mapStateToProps)(SidebarProgress);

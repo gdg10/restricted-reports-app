@@ -5,9 +5,7 @@ const initialState = {
 const report = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_CLIENT':
-            let newState = Object.assign({}, state);
-            newState.client = action.payload;
-            return newState;
+            return ({client : action.payload});
         default:
             return state;
     }

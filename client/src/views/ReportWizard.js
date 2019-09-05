@@ -12,15 +12,15 @@ import {
 } from "shards-react";
 
 import PageTitle from "../components/common/PageTitle";
-import SideBarProgress from "../components/create-new-report/SideBarProgress";
-import ClientForm from "../components/create-new-report/ClientForm";
-import CompForm from "../components/create-new-report/CompForm";
-import SubjectForm from "../components/create-new-report/SubjectForm";
-import MarketConditionsForm from "../components/create-new-report/MarketConditionsForm";
-import DataSourcesForm from "../components/create-new-report/DataSourcesForm";
-import ScopeForm from "../components/create-new-report/ScopeForm";
-import LimitingConditionsForm from "../components/create-new-report/LimitingConditionsForm";
-import ValueForm from "../components/create-new-report/ValueForm";
+import SideBarProgress from "../components/create/SideBarProgress";
+import ClientForm from "../components/create/ClientForm";
+import CompForm from "../components/create/CompForm";
+import SubjectForm from "../components/create/SubjectForm";
+import MarketConditionsForm from "../components/create/MarketConditionsForm";
+import DataSourcesForm from "../components/create/DataSourcesForm";
+import ScopeForm from "../components/create/ScopeForm";
+import LimitingConditionsForm from "../components/create/LimitingConditionsForm";
+import ValueForm from "../components/create/ValueForm";
 
 
 const ReportWizard = () => (
@@ -53,7 +53,7 @@ const ReportWizard = () => (
             <ClientForm />
           </Card>
 
-          <Card small className="mb-4">
+          {/* <Card small className="mb-4">
             <CardHeader className="border-bottom">
               <h6 className="m-0">Add Subject</h6>
             </CardHeader>
@@ -98,7 +98,7 @@ const ReportWizard = () => (
             <CardHeader className="border-bottom">
               <h6 className="m-0">Add Date</h6>
             </CardHeader>
-            {/* <CompForm /> */}
+            {/* <CompForm /> 
           </Card>
 
           <Card small className="mb-4">
@@ -113,9 +113,9 @@ const ReportWizard = () => (
               <h6 className="m-0">Add Limiting Conditions</h6>
             </CardHeader>
             <LimitingConditionsForm />
-          </Card>
+          </Card> */}
 
-        </Col>
+        </Col> 
 
         <Col lg="4" className="mb-4">
           <SideBarProgress />
