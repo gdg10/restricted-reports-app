@@ -53,14 +53,14 @@ const ReportWizard = () => (
             <ClientForm />
           </Card>
 
-          {/* <Card small className="mb-4">
+          <Card small className="mb-4">
             <CardHeader className="border-bottom">
               <h6 className="m-0">Add Subject</h6>
             </CardHeader>
             <SubjectForm />
           </Card>
 
-          <Card small className="mb-4">
+          {/* <Card small className="mb-4">
             <CardHeader className="border-bottom">
               <h6 className="m-0">Add Comparables</h6>
             </CardHeader>

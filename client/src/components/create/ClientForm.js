@@ -21,7 +21,6 @@ class ClientForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            valid: false,
             name: '',
             passwords : ["sdf"]
         }
@@ -73,12 +72,13 @@ class ClientForm extends React.Component {
                                     <Col md="12" className="form-group">
                                         <label htmlFor="feClientName">Client</label>
 
-                                        {this.state.valid === true ?
+                                        {this.props.name.length > 0 ?
                                             <FormInput
                                                 required
                                                 disabled
                                                 valid
                                                 id="feClientName"
+                                                value={this.props.name}
                                                 onChange={this.handleChange}
                                             />
                                             : <FormInput
@@ -99,5 +99,11 @@ class ClientForm extends React.Component {
         )
     }
 }
-//
-export default connect()(ClientForm);
+
+const mapStateToProps = (state) => {
+    return ({
+        name : state.report.client
+    });
+}
+
+export default connect(mapStateToProps)(ClientForm);

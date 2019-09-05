@@ -11,27 +11,27 @@ import {
   Button,
   Progress
 } from "shards-react";
-import PropertyLookup from "../../views/PropertyLookup";
 
 class SidebarProgress extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       completion : 0,
-      clientComplete : false
+      clientComplete : false,
+      subjectComplete : false
     }
   }
 
-  static getDerivedStateFromProps(props){
+  static getDerivedStateFromProps(props, state){
     if(props.client === ''){
       return({
-        completion : 0,
+        completion : state.completion,
         clientComplete : false
       });
     }
-    else{
+    else if(props.client !== ''){
       return ({
-        completion : 100,
+        completion : state.completion + 10,
         clientComplete : true
       })
     }
@@ -70,10 +70,10 @@ class SidebarProgress extends React.Component {
               </a>
               </span>
 
-              {/* <span className="d-flex mb-2">
+              <span className="d-flex mb-2">
                 <i className="material-icons mr-1">visibility</i>
                 <strong className="mr-1">Subject:</strong>{" "}
-                <strong className="text-warning">Incomplete</strong>{" "}
+                <strong className={this.state.subjectComplete ? "text-success" : "text-warning"}>{this.state.subjectComplete ? "Complete" : "Incomplete"}</strong>{" "}
                 <a className="ml-auto" href="#">
                   Edit
               </a>
@@ -149,7 +149,7 @@ class SidebarProgress extends React.Component {
                 <a className="ml-auto" href="#">
                   Edit
               </a>
-              </span> */}
+              </span>
 
 
             </ListGroupItem>
