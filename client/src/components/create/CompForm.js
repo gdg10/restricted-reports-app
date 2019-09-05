@@ -12,6 +12,8 @@ import {
     Button
 } from "shards-react";
 
+import { nextPrompt } from "../../redux/actions";
+
 class CompForm extends React.Component {
 
     constructor(props) {

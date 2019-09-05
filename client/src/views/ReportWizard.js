@@ -1,4 +1,5 @@
 import React from "react";
+import {connect} from "react-redux";
 import {
   Container,
   Row,
@@ -23,17 +24,14 @@ import LimitingConditionsForm from "../components/create/LimitingConditionsForm"
 import ValueForm from "../components/create/ValueForm";
 
 
-const ReportWizard = () => (
+const ReportWizard = (props) => (
   <div>
     <Container fluid className="px-0">
-
       {/* <Alert className="mb-0">
         <i className="fa fa-info mx-2"></i> How you doin'? I'm just a friendly, good-looking notification message and I come in all the colors you can see below. Pretty cool, huh?
       </Alert> */}
-
     </Container>
     <Container fluid className="main-content-container px-4">
-
       <Row noGutters className="page-header py-4">
         <PageTitle
           sm="4"
@@ -42,31 +40,20 @@ const ReportWizard = () => (
           className="text-sm-left"
         />
       </Row>
-
       <Row>
         <Col lg="8" className="mb-4">
 
+        {props.activePrompt === 0 ? <ClientForm /> : " " }
+        {props.activePrompt === 1 ? <SubjectForm /> : " " }
+{/* 
           <Card small className="mb-4">
-            <CardHeader className="border-bottom">
-              <h6 className="m-0">Add Client</h6>
-            </CardHeader>
-            <ClientForm />
-          </Card>
-
-          <Card small className="mb-4">
-            <CardHeader className="border-bottom">
-              <h6 className="m-0">Add Subject</h6>
-            </CardHeader>
-            <SubjectForm />
-          </Card>
-
-          {/* <Card small className="mb-4">
             <CardHeader className="border-bottom">
               <h6 className="m-0">Add Comparables</h6>
             </CardHeader>
             <CompForm />
           </Card>
 
+          
           <Card small className="mb-4">
             <CardHeader className="border-bottom">
               <h6 className="m-0">Add Market Conditions</h6>
@@ -74,6 +61,7 @@ const ReportWizard = () => (
             <MarketConditionsForm />
           </Card>
 
+  
           <Card small className="mb-4">
             <CardHeader className="border-bottom">
               <h6 className="m-0">Add Data Sources</h6>
@@ -98,7 +86,7 @@ const ReportWizard = () => (
             <CardHeader className="border-bottom">
               <h6 className="m-0">Add Date</h6>
             </CardHeader>
-            {/* <CompForm /> 
+            <CompForm /> 
           </Card>
 
           <Card small className="mb-4">
@@ -126,4 +114,10 @@ const ReportWizard = () => (
   </div>
 );
 
-export default ReportWizard;
+const mapStateToProps = (state) => {
+  return ({
+    activePrompt : state.activePrompt.activePrompt
+  });
+}
+
+export default connect(mapStateToProps)(ReportWizard);

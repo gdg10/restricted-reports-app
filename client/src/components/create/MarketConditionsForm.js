@@ -23,7 +23,7 @@ class MarketConditionsForm extends React.Component {
         super(props);
         this.state = {
             valid: false,
-            name: ''
+            market: ''
         }
 
         // this.handleChange = this.handleChange.bind(this);
@@ -32,9 +32,9 @@ class MarketConditionsForm extends React.Component {
 
 
     handleAdd = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         let isValid = false;
-        if (this.state.name.length > 0) {
+        if (this.state.market.length > 0) {
             isValid = true;
         }
 
@@ -44,6 +44,7 @@ class MarketConditionsForm extends React.Component {
     }
 
     handleChange = (e) => {
+        alert();
         this.setState({
             name: e.target.value
         });
@@ -61,7 +62,7 @@ class MarketConditionsForm extends React.Component {
                                         <label htmlFor="feClientName">Market Conditions</label>
                                         {/* Editor */}
                                         <Form className="add-new-post">
-                                            <ReactQuill className="add-new-post__editor mb-1" />
+                                            <ReactQuill onChange={this.handleChange} className="add-new-post__editor mb-1" />
                                         </Form>
                                     </Col>
                                 </Row>

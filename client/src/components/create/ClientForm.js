@@ -6,6 +6,8 @@ import {
     Col,
     Form,
     FormInput,
+    Card,
+    CardHeader,
     FormGroup,
     FormCheckbox,
     FormSelect,
@@ -13,8 +15,10 @@ import {
     Button
 } from "shards-react";
 
+import { nextPrompt } from "../../redux/actions";
 import { addClient } from "../../redux/actions";
 import { connect } from "react-redux";
+
 
 class ClientForm extends React.Component {
 
@@ -63,6 +67,10 @@ class ClientForm extends React.Component {
 
     render() {
         return (
+            <Card small className="mb-4">
+            <CardHeader className="border-bottom">
+              <h6 className="m-0">Add Client</h6>
+            </CardHeader>
             <Row>
                 <Col>
                     <Form>
@@ -90,12 +98,21 @@ class ClientForm extends React.Component {
                                         {/* <FormFeedback valid>You added a valid client.</FormFeedback> */}
                                     </Col>
                                 </Row>
-                                <Button onClick={this.handleAdd}>Add</Button>
+                                <Row>
+                                    <Col><Button size="sm" onClick={this.handleAdd}>Add</Button></Col>
+                                    <Col>              
+                                        <Button outline onClick={ ()=>{this.props.dispatch(nextPrompt())} } className="float-right" theme="accent" size="sm">
+                                            Next<i className="material-icons">arrow_right</i>
+                                        </Button>
+                                    </Col>
+                                </Row>
+                                
                             </ListGroupItem>
                         </ListGroup>
                     </Form>
                 </Col>
             </Row>
+            </Card>
         )
     }
 }

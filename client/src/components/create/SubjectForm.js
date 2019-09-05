@@ -4,6 +4,8 @@ import {
     ListGroupItem,
     Row,
     Col,
+    Card,
+    CardHeader,
     Form,
     FormInput,
     FormGroup,
@@ -13,6 +15,12 @@ import {
 } from "shards-react";
 
 const SubjectForm = () => (
+
+    <Card small className="mb-4">
+    <CardHeader className="border-bottom">
+      <h6 className="m-0">Add Subject</h6>
+    </CardHeader>
+
     <Row>
         <Col>
             <Form>
@@ -54,12 +62,6 @@ const SubjectForm = () => (
                                 <FormInput id="feMLSNumber"
                                 />
                             </Col>
-
-                            {/* <Col md="12" className="form-group">
-                                <FormCheckbox defaultChecked required>
-                                    I agree with your <a href="#">Terms of Use</a>.
-                                </FormCheckbox>
-                            </Col> */}
                         </Row>
                         <Button type="submit">Add</Button>
                     </ListGroupItem>
@@ -67,6 +69,7 @@ const SubjectForm = () => (
             </Form>
         </Col>
     </Row>
+    </Card>
 );
 
 export default SubjectForm;
