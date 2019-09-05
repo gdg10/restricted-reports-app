@@ -45,15 +45,18 @@ const ReportWizard = (props) => (
 
         {props.activePrompt === 0 ? <ClientForm /> : " " }
         {props.activePrompt === 1 ? <SubjectForm /> : " " }
-{/* 
-          <Card small className="mb-4">
-            <CardHeader className="border-bottom">
-              <h6 className="m-0">Add Comparables</h6>
-            </CardHeader>
-            <CompForm />
-          </Card>
+        {props.activePrompt === 2 ? <CompForm /> : " " }
+        {props.activePrompt === 3 ? <MarketConditionsForm /> : " " }
+        {props.activePrompt === 4 ? <DataSourcesForm /> : " " }
+        {/* {props.activePrompt === 5 ? <ExposureForm /> : " " }
+        {props.activePrompt === 6 ? <ValueForm /> : " " }
+        {props.activePrompt === 7 ? <DateForm /> : " " } */}
+        {props.activePrompt === 8 ? <ScopeForm /> : " " }
+        {props.activePrompt === 9 ? <LimitingConditionsForm /> : " " }
 
-          
+
+{/* 
+
           <Card small className="mb-4">
             <CardHeader className="border-bottom">
               <h6 className="m-0">Add Market Conditions</h6>
