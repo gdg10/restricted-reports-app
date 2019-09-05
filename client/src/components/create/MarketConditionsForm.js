@@ -5,6 +5,8 @@ import {
     Row,
     Col,
     Form,
+    Card,
+    CardHeader,
     FormInput,
     FormGroup,
     FormCheckbox,
@@ -16,6 +18,7 @@ import {
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../../assets/quill.css";
+import NavButtons from "./NavButtons";
 
 class MarketConditionsForm extends React.Component {
 
@@ -52,6 +55,11 @@ class MarketConditionsForm extends React.Component {
 
     render() {
         return (
+
+          <Card small className="mb-4">
+          <CardHeader className="border-bottom">
+            <h6 className="m-0">Add Market Conditions</h6>
+          </CardHeader>
             <Row>
                 <Col>
                     <Form>
@@ -66,12 +74,16 @@ class MarketConditionsForm extends React.Component {
                                         </Form>
                                     </Col>
                                 </Row>
-                                <Button onClick={this.handleAdd}>Add</Button>
+                                <Row>
+                                    <Col><Button theme="success" onClick={this.handleAdd}>Add</Button></Col>
+                                    <Col><NavButtons /></Col>
+                                </Row>
                             </ListGroupItem>
                         </ListGroup>
                     </Form>
                 </Col>
             </Row>
+            </Card>
         )
     }
 }

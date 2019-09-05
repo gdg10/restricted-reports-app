@@ -4,11 +4,6 @@ import {
   Container,
   Row,
   Col,
-  Card,
-  CardHeader,
-  ListGroup,
-  ListGroupItem,
-  Form,
   Alert
 } from "shards-react";
 
@@ -56,22 +51,6 @@ const ReportWizard = (props) => (
 
 
 {/* 
-
-          <Card small className="mb-4">
-            <CardHeader className="border-bottom">
-              <h6 className="m-0">Add Market Conditions</h6>
-            </CardHeader>
-            <MarketConditionsForm />
-          </Card>
-
-  
-          <Card small className="mb-4">
-            <CardHeader className="border-bottom">
-              <h6 className="m-0">Add Data Sources</h6>
-            </CardHeader>
-            <DataSourcesForm />
-          </Card>
-
           <Card small className="mb-4">
             <CardHeader className="border-bottom">
               <h6 className="m-0">Add Exposure Time</h6>

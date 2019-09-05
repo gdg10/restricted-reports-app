@@ -5,13 +5,12 @@ import {
     Row,
     Col,
     Form,
-    FormInput,
-    FormGroup,
+    Card,
+    CardHeader,
     FormCheckbox,
-    FormSelect,
-    FormFeedback,
     Button
 } from "shards-react";
+import NavButtons from "./NavButtons";
 
 class DataSourcesForm extends React.Component {
 
@@ -46,7 +45,11 @@ class DataSourcesForm extends React.Component {
     }
 
     render() {
-        return (
+        return(
+        <Card small className="mb-4">
+        <CardHeader className="border-bottom">
+          <h6 className="m-0">Add Data Sources</h6>
+        </CardHeader>
             < Row >
                 <Col>
                     <Form>
@@ -73,12 +76,16 @@ class DataSourcesForm extends React.Component {
                                         {/* <FormFeedback valid>You added a valid client.</FormFeedback> */}
                                     </Col>
                                 </Row>
-                                <Button onClick={this.handleAdd}>Add</Button>
+                                <Row>
+                                    <Col><Button theme="success" onClick={this.handleAdd}>Add</Button></Col>
+                                    <Col><NavButtons /></Col>
+                                </Row>
                             </ListGroupItem>
                         </ListGroup>
                     </Form>
                 </Col>
             </Row >
+            </Card>
         )
     }
 }

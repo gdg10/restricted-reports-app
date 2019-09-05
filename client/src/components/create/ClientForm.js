@@ -1,4 +1,7 @@
 import React from "react";
+import { connect } from "react-redux";
+import { addClient } from "../../redux/actions";
+import NavButtons from "./NavButtons";
 import {
     ListGroup,
     ListGroupItem,
@@ -8,17 +11,9 @@ import {
     FormInput,
     Card,
     CardHeader,
-    FormGroup,
-    FormCheckbox,
-    FormSelect,
-    FormFeedback,
-    Button
+    Button,
+    FormFeedback
 } from "shards-react";
-
-import { connect } from "react-redux";
-import { addClient } from "../../redux/actions";
-import NavButtons from "./NavButtons";
-
 
 class ClientForm extends React.Component {
 
@@ -28,13 +23,9 @@ class ClientForm extends React.Component {
             name: '',
             passwords: ["sdf"]
         }
-
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleAdd = this.handleAdd.bind(this);
     }
 
-
-    //   // Fetch passwords after first mount
+    // Fetch passwords after first mount
     componentDidMount() {
         this.getPasswords();
     }
@@ -95,7 +86,7 @@ class ClientForm extends React.Component {
                                                     onChange={this.handleChange}
                                                 />}
 
-                                            {/* <FormFeedback valid>You added a valid client.</FormFeedback> */}
+                                            <FormFeedback valid>valid client</FormFeedback>
                                         </Col>
                                     </Row>
                                     <Row>

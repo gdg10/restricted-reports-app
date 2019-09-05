@@ -4,6 +4,16 @@ export const addClient = (client) => ({
     payload : client
 });
 
+export const addComp = (comp) => ({
+    type: "ADD_COMP",
+    payload: comp
+})
+
+export const removeComp = (compIndex) => ({
+    type: "ADD_COMP",
+    payload: compIndex
+})
+
 //Prompts actions
 export const nextPrompt = () => ({
     type: "NEXT_PROMPT",
