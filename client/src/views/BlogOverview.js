@@ -18,7 +18,7 @@ const BlogOverview = ({ smallStats }) => (
     </Row>
 
     {/* Small Stats Blocks */}
-    <Row>
+    {/* <Row>
       {smallStats.map((stats, idx) => (
         <Col className="col-lg mb-4" key={idx} {...stats.attrs}>
           <SmallStats
@@ -34,18 +34,19 @@ const BlogOverview = ({ smallStats }) => (
           />
         </Col>
       ))}
-    </Row>
+    </Row> */}
 
     <Row>
+    <Col>Dashboard overview coming soon...</Col>
       {/* Users Overview */}
-      <Col lg="8" md="12" sm="12" className="mb-4">
+      {/* <Col lg="8" md="12" sm="12" className="mb-4">
         <UsersOverview />
-      </Col>
+      </Col> */}
 
       {/* Users by Device */}
-      <Col lg="4" md="6" sm="12" className="mb-4">
+      {/* <Col lg="4" md="6" sm="12" className="mb-4">
         <UsersByDevice />
-      </Col>
+      </Col> */}
 
       {/* New Draft */}
       {/* <Col lg="4" md="6" sm="12" className="mb-4">

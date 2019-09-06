@@ -30,12 +30,12 @@ class PropertyLookup extends React.Component {
         <Row noGutters className="page-header py-4">
           <PageTitle sm="4" title="Property Lookup" subtitle="Estated API" className="text-sm-left" />
         </Row>
-        <Row>
+
+        <Row><Col>Estated API property lookup coming soon...</Col></Row>
+        {/*  Commemented out temporarilty for production build */}
+        {/* <Row>
           <Col>
           <Card small className="mb-4">
-            {/* <CardHeader className="border-bottom">
-              <h6 className="m-0"> Form</h6>
-            </CardHeader> */}
             <PropertyForm />
           </Card>
           </Col>
@@ -49,7 +49,9 @@ class PropertyLookup extends React.Component {
             <PropertyTable />
           </Card>
           </Col>
-        </Row>
+        </Row> */}
+
+
       </Container>
     );
   }

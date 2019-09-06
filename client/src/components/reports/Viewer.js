@@ -33,7 +33,7 @@ class Viewer extends React.Component {
                 </Card>
             </React.Fragment>)
         }else{
-            return("No reports to show right now. Publish a report in the 'Create' tab.");
+            return("No reports to show right now. Publish a report in the 'Create' tab to view it here.");
         }
     }
 }
