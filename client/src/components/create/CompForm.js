@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addComp } from "../../redux/actions";
+import { addComp } from "../../redux/actions/reportActions";
 
 import {
     ListGroup,

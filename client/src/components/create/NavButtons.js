@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { nextPrompt, lastPrompt } from "../../redux/actions";
+import { nextPrompt, lastPrompt } from "../../redux/actions/promptActions";
 import {
     Button,
     ButtonGroup

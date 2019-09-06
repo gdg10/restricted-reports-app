@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { removeComp } from "../../redux/actions"
+import { removeComp } from "../../redux/actions/reportActions"
 import { Button } from "shards-react";
 
 // TABLE ROW DISPLAYING A SALES COMPARABLE

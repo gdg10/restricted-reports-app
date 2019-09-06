@@ -1,10 +1,16 @@
 import React from "react";
+import NavButtons from "./NavButtons";
+import { connect } from "react-redux";
+import { addMarket } from "../../redux/actions/reportActions";
+import { incrementProgress } from "../../redux/actions/wizardActions";
 import {
     ListGroup,
     ListGroupItem,
     Row,
     Col,
     Form,
+    Card,
+    CardHeader,
     FormInput,
     FormGroup,
     FormCheckbox,
@@ -13,67 +19,64 @@ import {
     Button
 } from "shards-react";
 
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import "../../assets/quill.css";
+
 
 class ValueForm extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            valid: false,
-            name: ''
+            market: ''
         }
-
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleAdd = this.handleAdd.bind(this);
     }
 
-
     handleAdd = (e) => {
-        // e.preventDefault();
-        let isValid = false;
-        if (this.state.name.length > 0) {
-            isValid = true;
+        e.preventDefault();
+        if (this.state.market.length > 0) {
+            this.props.dispatch(addMarket(this.state.market));
+            this.props.dispatch(incrementProgress());
         }
-
-        this.setState({
-            valid: isValid
-        });
     }
 
     handleChange = (e) => {
         this.setState({
-            name: e.target.value
+            market: e.target.value
         });
     }
 
     render() {
-        return ('')
-        //     <Form>
-        //         <ListGroup flush>
-        //             <ListGroupItem className="p-3">
-        //                 <Row>
-        //                     <Col>min</Col>
-        //                     <Col >max</Col>
-        //                 </Row>
-        //             <ListGroupItem />
-        //             <ListGroupItem className="p-3">
-        //                 <Row form>
-        //                     <Col md="12" className="form-group">
-        //                         <label htmlFor="feClientName">Value</label>
-        //                         <ReactQuill className="add-new-post__editor mb-1" />
-        //                     </Col>
-        //                 </Row>
-        //                 <Row>
-        //                     <Button onClick={this.handleAdd}>Add</Button>
-        //                 <Row>
-        //             </ListGroupItem>
-        //         </ListGroup>
-        //     </Form>
-        // )
+        return (
+
+            <Card small className="mb-4">
+                <CardHeader className="border-bottom">
+                    <h6 className="m-0">Add Value Range & Reconciliation</h6>
+                </CardHeader>
+                <Row>
+                    <Col>
+                        <Form>
+                            <ListGroup flush>
+                                <ListGroupItem className="p-3">
+                                    <Row form>
+                                        <Col md="12" className="form-group">
+                                            <div className="form-group">
+                                                <textarea onChange={this.handleChange} className="form-control" rows="5" id="comment"></textarea>
+                                            </div>
+                                        </Col>
+                                    </Row>
+
+                                    {/* BUTTONS */}
+                                    <Row>
+                                        <Col><Button theme="success" onClick={this.handleAdd}>Add</Button></Col>
+                                        <Col><NavButtons /></Col>
+                                    </Row>
+                                </ListGroupItem>
+                            </ListGroup>
+                        </Form>
+                    </Col>
+                </Row>
+            </Card>
+        )
     }
 }
 
-export default ValueForm;
+export default connect()(ValueForm);

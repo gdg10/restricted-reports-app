@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { addClient } from "../../redux/actions";
+import { addClient } from "../../redux/actions/reportActions";
+import { incrementProgress } from "../../redux/actions/wizardActions";
 import NavButtons from "./NavButtons";
 import {
     ListGroup,
@@ -43,6 +44,7 @@ class ClientForm extends React.Component {
         if (this.state.name.length > 0) {
             isValid = true;
             this.props.dispatch(addClient(this.state.name));
+            this.props.dispatch(incrementProgress());
         }
 
         this.setState({

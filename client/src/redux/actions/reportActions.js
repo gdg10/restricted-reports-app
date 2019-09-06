@@ -4,6 +4,11 @@ export const addClient = (client) => ({
     payload : client
 });
 
+export const addSubject = (subject) => ({
+    type: "ADD_SUBJECT",
+    payload: subject
+})
+
 export const addComp = (comp) => ({
     type: "ADD_COMP",
     payload: comp
@@ -14,14 +19,7 @@ export const removeComp = (compIndex) => ({
     payload: compIndex
 })
 
-//Prompts actions
-export const nextPrompt = () => ({
-    type: "NEXT_PROMPT",
-});
-export const lastPrompt = () => ({
-    type: "LAST_PROMPT",
-});
-export const jumpToPrompt = (p) => ({
-    type: "JUMP_TO_PROMPT",
-    payload : p
-});
+export const addMarket = (market) => ({
+    type: "ADD_MARKET",
+    payload: market
+})

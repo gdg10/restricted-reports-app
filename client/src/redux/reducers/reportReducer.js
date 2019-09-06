@@ -1,7 +1,8 @@
 const initialState = {
     client : '',
-    subject : '',
-    comparables : []
+    subject : {},
+    comparables : [],
+    market : {}
 }
 
 const report = (state = initialState, action) => {
@@ -11,12 +12,16 @@ const report = (state = initialState, action) => {
             newState.client = action.payload;
             return newState;
         case 'ADD_SUBJECT':
-            return ({subject : action.payload});
+            newState.subject = action.payload;
+            return newState;
         case 'ADD_COMP':
             newState.comparables.push(action.payload);
             return newState;
         case 'REMOVE_COMP':
             return ({comparables : state.comparables.splice(action.payload)});
+        case 'ADD_MARKET':
+            newState.market = action.payload;
+            return newState;
         default:
             return state;
     }

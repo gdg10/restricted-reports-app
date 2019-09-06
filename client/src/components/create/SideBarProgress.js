@@ -25,13 +25,11 @@ class SidebarProgress extends React.Component {
   static getDerivedStateFromProps(props, state){
     if(props.client === ''){
       return({
-        completion : state.completion,
         clientComplete : false
       });
     }
     else if(props.client !== ''){
       return ({
-        completion : state.completion + 10,
         clientComplete : true
       })
     }
@@ -53,8 +51,8 @@ class SidebarProgress extends React.Component {
                 <strong className="text-muted d-block mb-2">
                   Completion
                 </strong>
-                <Progress className="progress-sm" value={this.state.completion}>
-                  <span className="progress-value"> {this.state.completion}% </span>
+                <Progress className="progress-sm" theme="success" value={this.props.progress}>
+                  <span className="progress-value"> {this.props.progress}% </span>
                 </Progress>
               </div>
             </ListGroupItem>
@@ -172,7 +170,8 @@ class SidebarProgress extends React.Component {
 
 const mapStateToProps = (state) => {
   return ({
-    client: state.report.client
+    progress : state.wizard.progress,
+    client : state.report.client
   })
 }
 

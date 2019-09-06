@@ -56,24 +56,24 @@ class DataSourcesForm extends React.Component {
                         <ListGroup flush>
                             <ListGroupItem className="p-3">
                                 <Row form>
-                                    <Col md="12" className="form-group">
-                                        <label htmlFor="feClientName">Client</label>
-
-                                        <strong className="text-muted d-block mb-2">Checkboxes</strong>
-                                        <fieldset>
-                                            <FormCheckbox>Default</FormCheckbox>
+                                    <Col md="4" className="form-group">
+                                    <fieldset>
+                                            <FormCheckbox>MLS</FormCheckbox>
+                                            <FormCheckbox>Inspection</FormCheckbox>
                                         </fieldset>
+                                    </Col>
+                                        
+                                    <Col md="4" className="form-group">
                                         <fieldset>
-                                            <FormCheckbox>Default</FormCheckbox>
+                                            <FormCheckbox>Appraiser</FormCheckbox>
+                                            <FormCheckbox>Public Records</FormCheckbox>
                                         </fieldset>
+                                    </Col>   
+                                    <Col md="4" className="form-group">
                                         <fieldset>
-                                            <FormCheckbox>Default</FormCheckbox>
+                                            <FormCheckbox>Home Owner</FormCheckbox>
+                                            <FormCheckbox>Other</FormCheckbox>
                                         </fieldset>
-                                        <fieldset>
-                                            <FormCheckbox>Default</FormCheckbox>
-                                        </fieldset>
-
-                                        {/* <FormFeedback valid>You added a valid client.</FormFeedback> */}
                                     </Col>
                                 </Row>
                                 <Row>
