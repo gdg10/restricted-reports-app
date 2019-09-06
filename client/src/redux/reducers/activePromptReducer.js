@@ -10,15 +10,15 @@ const activePrompt = (state = initialState, action) => {
     switch (action.type) {
         case 'NEXT_PROMPT':
             if(state.activePrompt < MAX_INDEX){
-                return ({activePrompt : state.activePrompt + 1});
+                return ({activePrompt : state.activePrompt + 1}); //increment if within bounds
             }else{
-                return state;
+                return ({activePrompt : 0}); //otherwise, wrap around to beginning
             }
         case 'LAST_PROMPT':
                 if(state.activePrompt > MIN_INDEX){
-                    return ({activePrompt : state.activePrompt - 1});
+                    return ({activePrompt : state.activePrompt - 1}); //decrement if withinbounds
                 }else{
-                    return state;
+                    return ({activePrompt : 9}); //otherwise, wrap around to end
                 }
         case 'JUMP_TO_PROMPT':
                 if(state.activePrompt >= MIN_INDEX && state.activePrompt <= MAX_INDEX){
