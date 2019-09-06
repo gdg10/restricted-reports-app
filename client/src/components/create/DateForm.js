@@ -57,9 +57,16 @@ class DateForm extends React.Component {
                             <ListGroup flush>
                                 <ListGroupItem className="p-3">
                                     <Row form>
-                                        <Col md="12" className="form-group">
+                                        <Col md="6" className="form-group">
                                             <div className="form-group">
-                                                <textarea onChange={this.handleChange} className="form-control" rows="5" id="comment"></textarea>
+                                                <label for="crt">Create Date</label>
+                                                <input type="date" className="form-control" id="crt"></input>
+                                            </div>
+                                        </Col>
+                                        <Col md="6" className="form-group">
+                                            <div className="form-group">
+                                                <label for="usr">Effective Date</label>
+                                                <input type="date" className="form-control" id="usr"></input>
                                             </div>
                                         </Col>
                                     </Row>

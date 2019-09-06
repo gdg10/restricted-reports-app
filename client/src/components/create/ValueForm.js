@@ -56,9 +56,24 @@ class ValueForm extends React.Component {
                         <Form>
                             <ListGroup flush>
                                 <ListGroupItem className="p-3">
+                                <Row form>
+                                        <Col md="6" className="form-group">
+                                            <div className="form-group">
+                                                <label for="crt">Minimum Price</label>
+                                                <input type="number" className="form-control" id="crt"></input>
+                                            </div>
+                                        </Col>
+                                        <Col md="6" className="form-group">
+                                            <div className="form-group">
+                                                <label for="usr">Maximum Price</label>
+                                                <input type="number" className="form-control" id="usr"></input>
+                                            </div>
+                                        </Col>
+                                    </Row>
                                     <Row form>
                                         <Col md="12" className="form-group">
                                             <div className="form-group">
+                                                <label for="comment">Reconciliation</label>
                                                 <textarea onChange={this.handleChange} className="form-control" rows="5" id="comment"></textarea>
                                             </div>
                                         </Col>

@@ -62,7 +62,7 @@ class ClientForm extends React.Component {
         return (
             <Card small className="mb-4">
                 <CardHeader className="border-bottom">
-                    <h6 className="m-0">Add Client</h6>
+                    <h6 className="m-0">Add Client Name</h6>
                 </CardHeader>
                 <Row>
                     <Col>
@@ -71,7 +71,7 @@ class ClientForm extends React.Component {
                                 <ListGroupItem className="p-3">
                                     <Row form>
                                         <Col md="12" className="form-group">
-                                            <label htmlFor="feClientName">Client</label>
+                                            {/* <label htmlFor="feClientName">Client</label> */}
 
                                             {this.props.name.length > 0 ?
                                                 <FormInput
