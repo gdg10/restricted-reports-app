@@ -73,13 +73,14 @@ class Landing extends React.Component {
   }
 
   render() {
-    return (
-      <Container fluid className="main-content-container px-4" style={{ position: 'relative'}}>
+    return (//linear-gradient(to right, #00d2ff, #3a7bd5) //linear-gradient(to right, #757f9a, #d7dde8) //linear-gradient(to left, #606c88, #3f4c6b) //linear-gradient(to top, #abbaab, #ffffff) //linear-gradient(to left, #8e9eab, #eef2f3)
+      <Container fluid className="main-content-container px-4" style={{ background:"linear-gradient(to left, #8e9eab, #eef2f3)", height : '100vh', width : '100vw', position: 'relative'}}>
         {this.shouldLogin()}
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
           <Row>
             <Col className="text-center">
               <Card large className="px-3">
+                
                 <CardHeader className="border-bottom">
                   <h7 className="m-0">Welcome to</h7>
                   <h5 className="m-0">Restricted Reports</h5>
@@ -101,7 +102,7 @@ class Landing extends React.Component {
                       </InputGroupAddon>
 
                       {(this.state.validLogin === false && this.state.firstTry === false) ? (<FormInput invalid placeholder="username" id='user' onChange={this.handleUserChange} />) : 
-                      (<FormInput placeholder="username" id='user' onChange={this.handleUserChange} />)}
+                      (<FormInput autoFocus placeholder="username" id='user' onChange={this.handleUserChange} />)}
                       
                     </InputGroup>
 
@@ -117,12 +118,9 @@ class Landing extends React.Component {
                     </InputGroup>
 
                     <Button className="mb-1" onClick={this.handleClick}>Login</Button>
+
                   </ListGroupItem>
                 </ListGroup>
-
-              {/* <CardFooter>
-                v.1
-              </CardFooter> */}
               </Card>
             </Col>
           </Row>
@@ -131,6 +129,5 @@ class Landing extends React.Component {
     )
   }
 }
-
 
 export default Landing;

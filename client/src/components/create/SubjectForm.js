@@ -149,9 +149,8 @@ class SubjectForm extends React.Component {
 
                                         {/* MLS */}
                                         <Col md="12" className="form-group">
-                                            <label htmlFor="feMLSNumber">MLS Number (Optional)</label>
-                                            <FormInput onChange={this.handleCurMLS} id="feMLSNumber"
-                                            />
+                                            <label htmlFor="feMLSNumber">MLS Number</label>
+                                            <FormInput onChange={this.handleCurMLS} placeholder="optional" id="feMLSNumber"/>
                                         </Col>
                                     </Row>
 

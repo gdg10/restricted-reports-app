@@ -13,6 +13,9 @@ import {
 } from "shards-react";
 
 import PageTitle from "../components/common/PageTitle";
+import Viewer from "../components/reports/Viewer";
+import PublishedTable from "../components/reports/PublishedTable";
+
 
 class BlogPosts extends React.Component {
   constructor(props) {
@@ -29,7 +32,16 @@ class BlogPosts extends React.Component {
         <Row noGutters className="page-header py-4">
           <PageTitle sm="4" title="Reports" subtitle="Drafts & Published" className="text-sm-left" />
         </Row>
-
+        <Row md='12'>
+          <Col md='10'>
+            <Viewer />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <PublishedTable />
+          </Col>
+        </Row>
       </Container>
     );
   }

@@ -2,6 +2,7 @@
 
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import {
   Card,
   CardHeader,
@@ -11,6 +12,7 @@ import {
   Button,
   Progress
 } from "shards-react";
+import { makeActiveReport } from "../../redux/actions/activeReportActions";
 
 class SidebarProgress extends React.Component {
   constructor(props) {
@@ -35,7 +37,20 @@ class SidebarProgress extends React.Component {
     }
   }
 
+  handlePublish = () => {
+    fetch('/api/getPDF')
+      .then(res => res.json())
+      .then(res => res.replace(/\\/g, ""))
+      .then(res => JSON.parse(res))
+      .then(res => this.props.dispatch(makeActiveReport(res.response)))
+  }
+
   render() {
+    var saveDisabled = this.props.progress <= 0;
+    
+    // var publishDisabled = this.props.progress !== 100; //logic disabled for testing
+    var publishDisabled = false;
+
     return (
       <Card small className="mb-3">
         <CardHeader className="border-bottom">
@@ -153,14 +168,16 @@ class SidebarProgress extends React.Component {
             </ListGroupItem>
 
             <ListGroupItem className="d-flex px-3">
-              <Button outline theme="accent" size="sm">
-                <i className="material-icons">save</i> Save Draft
-            </Button>
-              <Button theme="accent" size="sm" className="ml-auto">
-                <i className="material-icons">file_copy</i> Publish
-            </Button>
-            </ListGroupItem>
 
+              {saveDisabled === true ? 
+                (<Button outline  disabled theme="accent" size="sm"><i className="material-icons">save</i> Save Draft</Button>)
+                : (<Button outline theme="accent" size="sm"><i className="material-icons">save</i> Save Draft</Button>)}
+
+              {publishDisabled === true ? 
+                (<Button disabled theme="accent" size="sm" className="ml-auto"><i className="material-icons">file_copy</i> Publish</Button>)
+                : (<Button onClick={this.handlePublish} theme="accent" size="sm" className="ml-auto"><i className="material-icons">file_copy</i> Publish</Button>)}
+
+            </ListGroupItem>
           </ListGroup>
         </CardBody>
       </Card>
