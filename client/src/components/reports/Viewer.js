@@ -10,11 +10,10 @@ class Viewer extends React.Component {
     
     constructor(props){
         super(props);
-        
     }
 
     render(){
-        var active = !(this.props.activeReport === null);
+        var active = !(this.props.activeReport === null); 
         if(active){
             return (        
             <React.Fragment>
@@ -33,7 +32,7 @@ class Viewer extends React.Component {
                 </Card>
             </React.Fragment>)
         }else{
-            return("No reports to show right now. Publish a report in the 'Create' tab to view it here.");
+            return("");     // SHOW NOTHING IF NO REPORT IS ACTIVE
         }
     }
 }
