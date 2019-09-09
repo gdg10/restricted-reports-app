@@ -103,6 +103,7 @@ class SubjectForm extends React.Component {
                     <Col>
                         <Form>
                             <ListGroup flush>
+                            {/* <Col md="12"><h7 className=""><i>Add the name of the person, business or institution to which the completed report is to be delivered.</i></h7></Col> */}
                                 <ListGroupItem className="p-3">
                                     <Row form>
                                         {

@@ -26,7 +26,7 @@ class ValueForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            market: ''
+            exposureTime: ''
         }
     }
 
@@ -59,13 +59,13 @@ class ValueForm extends React.Component {
                                 <Row form>
                                         <Col md="6" className="form-group">
                                             <div className="form-group">
-                                                <label for="crt">Minimum Time on Market</label>
+                                                <label htmlFor="crt">Minimum Time on Market</label>
                                                 <input type="number" className="form-control" id="crt"></input>
                                             </div>
                                         </Col>
                                         <Col md="6" className="form-group">
                                             <div className="form-group">
-                                                <label for="usr">Maximum Time on Market</label>
+                                                <label htmlFor="usr">Maximum Time on Market</label>
                                                 <input type="number" className="form-control" id="usr"></input>
                                             </div>
                                         </Col>
@@ -84,6 +84,13 @@ class ValueForm extends React.Component {
             </Card>
         )
     }
+}
+
+const mapStateToProps = (state) => {
+    return ({
+        exposureMin : state.report.exposureTimeMin,
+        exposureMax : state.report.exposureTimeMax
+    })
 }
 
 export default connect()(ValueForm);

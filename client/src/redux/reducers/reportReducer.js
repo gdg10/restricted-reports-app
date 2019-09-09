@@ -17,13 +17,16 @@ const initialState = {
     sources: '',
     sourcesComplete: false,
 
-    exposure: '',
+    exposureTimeMin: '',
+    exposureTimeMax: '',
     exposureComplete: false,
 
-    value: '',
+    valueMin: '',
+    valueMax: '',
     valueComplete: false,
 
-    date: '',
+    dateMin: '',
+    dateMax: '',
     dateComplete: false,
 
     scope: '',
@@ -50,6 +53,14 @@ const report = (state = initialState, action) => {
         case 'ADD_MARKET':
             newState.market = action.payload;
             newState.marketComplete = true;
+            return newState;
+        case 'ADD_SCOPE':
+            newState.scope = action.payload;
+            newState.scopeComplete = true;
+            return newState;
+        case 'ADD_CONDITIONS':
+            newState.conditions = action.payload;
+            newState.conditionsComplete = true;
             return newState;
         default:
             return state;

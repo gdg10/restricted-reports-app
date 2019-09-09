@@ -72,8 +72,7 @@ class ClientForm extends React.Component {
                                 <ListGroupItem className="p-3">
                                     <Row form>
                                         <Col md="12" className="form-group">
-                                            {/* <label htmlFor="feClientName">Client</label> */}
-
+                                            <label htmlFor="feClientName">Client</label>
                                             {
                                                 this.props.locked === true ?
                                                 (<FormInput

@@ -22,8 +22,8 @@ class ProgressItem extends Component {
                     {this.props.completed ? "Complete" : "Incomplete"}
                 </strong>
                 
-                {/* EDIT BUTTON */}
-                <a className="ml-auto" href="#">Edit</a>
+                {/* EDIT BUTTON. Show only when completed */}
+                <a className="ml-auto" href="#">{this.props.completed ? "Edit" : ''}</a>
 
             </span>
         );

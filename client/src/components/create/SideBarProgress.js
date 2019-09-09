@@ -38,8 +38,8 @@ class SidebarProgress extends React.Component {
         completed: this.props.comparablesComplete
       },
       {
-        name : "Conditions",
-        completed: this.props.conditionsComplete
+        name : "Market",
+        completed: this.props.marketComplete
       },
       {
         name : "Sources",
@@ -60,6 +60,10 @@ class SidebarProgress extends React.Component {
       {
         name : "Scope",
         completed: this.props.scopeComplete
+      },
+      {
+        name : "Conditions",
+        completed: this.props.conditionsComplete
       }
     ];
   

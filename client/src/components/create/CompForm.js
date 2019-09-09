@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addComp } from "../../redux/actions/reportActions";
+import NavButtons from "./NavButtons";
+import CompFormRow from "./CompFormRow";
 
 import {
     ListGroup,
@@ -16,8 +18,6 @@ import {
     FormSelect,
     Button
 } from "shards-react";
-import NavButtons from "./NavButtons";
-import CompFormRow from "./CompFormRow";
 
 class CompForm extends React.Component {
 
@@ -85,8 +85,8 @@ class CompForm extends React.Component {
 
         } else {
             this.props.dispatch(addComp({
-                adddress: this.state.curAddress,
-                addresss2: this.state.curAddress2,
+                address: this.state.curAddress,
+                address2: this.state.curAddress2,
                 city: this.state.curCity,
                 state: this.state.curState,
                 zip: this.state.curZip,
@@ -173,7 +173,7 @@ class CompForm extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {/* {this.props.comps.map((x,index)=> ('fuck'))} */}
+                            { this.props.comps.map( (n, index) => <CompFormRow comp={n} number={index} key={index}/>) }
                             {/* {<CompFormRow key={index} /> */}
                         </tbody>
                     </table>

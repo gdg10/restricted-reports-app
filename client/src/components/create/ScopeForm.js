@@ -1,7 +1,7 @@
 import React from "react";
 import NavButtons from "./NavButtons";
 import { connect } from "react-redux";
-import { addMarket } from "../../redux/actions/reportActions";
+import { addScope } from "../../redux/actions/reportActions";
 import { incrementProgress } from "../../redux/actions/wizardActions";
 import {
     ListGroup,
@@ -26,14 +26,14 @@ class ScopeForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            market: ''
+            scope: ''
         }
     }
 
     handleAdd = (e) => {
         e.preventDefault();
         if (this.state.market.length > 0) {
-            this.props.dispatch(addMarket(this.state.market));
+            this.props.dispatch(addScope(this.state.scope));
             this.props.dispatch(incrementProgress());
         }
     }
@@ -59,14 +59,24 @@ class ScopeForm extends React.Component {
                                     <Row form>
                                         <Col md="12" className="form-group">
                                             <div className="form-group">
-                                                <textarea onChange={this.handleChange} className="form-control" rows="5" id="comment"></textarea>
+                                            {
+                                                this.props.locked === true ?
+                                                    (<textarea disabled valid value={this.props.scope} className="form-control" rows="5" id="comment"></textarea>)
+                                                    : (<textarea onChange={this.handleChange} className="form-control" rows="5" id="comment"></textarea>)
+                                            }
                                             </div>
                                         </Col>
                                     </Row>
 
                                     {/* BUTTONS */}
                                     <Row>
-                                        <Col><Button theme="success" onClick={this.handleAdd}>Add</Button></Col>
+                                        <Col>
+                                        {
+                                            this.props.locked === true ?
+                                                (<Button size="sm" disabled theme="success" onClick={this.handleAdd}>Add</Button>)
+                                                : (<Button size="sm" theme="success" onClick={this.handleAdd}>Add</Button>)
+                                        }
+                                        </Col>
                                         <Col><NavButtons /></Col>
                                     </Row>
                                 </ListGroupItem>
@@ -79,4 +89,10 @@ class ScopeForm extends React.Component {
     }
 }
 
-export default connect()(ScopeForm);
+const mapStateToProps = (state) => {
+    return ({
+        scope : state.report.scope
+    });
+}
+
+export default connect(mapStateToProps)(ScopeForm);

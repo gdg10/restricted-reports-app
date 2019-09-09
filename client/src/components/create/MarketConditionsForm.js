@@ -59,14 +59,25 @@ class MarketConditionsForm extends React.Component {
                                     <Row form>
                                         <Col md="12" className="form-group">
                                             <div className="form-group">
-                                                <textarea onChange={this.handleChange} className="form-control" rows="5" id="comment"></textarea>
+                                            {
+                                                this.props.locked === true ?
+                                                    (<textarea disabled valid value={this.props.market} className="form-control" rows="5" id="comment"></textarea>)
+                                                    : (<textarea onChange={this.handleChange} className="form-control" rows="5" id="comment"></textarea>)
+                                            }
+                                            <FormFeedback valid>Valid Market Conditions have been added.</FormFeedback>
                                             </div>
                                         </Col>
                                     </Row>
 
                                     {/* BUTTONS */}
                                     <Row>
-                                        <Col><Button theme="success" onClick={this.handleAdd}>Add</Button></Col>
+                                        <Col>
+                                        {
+                                            this.props.locked === true ?
+                                                (<Button size="sm" disabled theme="success" onClick={this.handleAdd}>Add</Button>)
+                                                : (<Button size="sm" theme="success" onClick={this.handleAdd}>Add</Button>)
+                                        }
+                                        </Col>
                                         <Col><NavButtons /></Col>
                                     </Row>
                                 </ListGroupItem>
@@ -79,4 +90,10 @@ class MarketConditionsForm extends React.Component {
     }
 }
 
-export default connect()(MarketConditionsForm);
+const mapStateToProps = (state) => {
+    return ({
+        market : state.report.market
+    });
+}
+
+export default connect(mapStateToProps)(MarketConditionsForm);
