@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { addSubject } from "../../redux/actions/reportActions";
 import { incrementProgress } from "../../redux/actions/wizardActions";
-
+import NavButtons from "./NavButtons";
 
 import {
     ListGroup,
@@ -14,12 +14,10 @@ import {
     Form,
     FormInput,
     FormGroup,
-    FormCheckbox,
     FormSelect,
     Button,
-    ButtonGroup
+    FormFeedback
 } from "shards-react";
-import NavButtons from "./NavButtons";
 
 class SubjectForm extends React.Component {
 
@@ -27,17 +25,13 @@ class SubjectForm extends React.Component {
         super(props);
         this.state = {
             curAddress: '',
-            curAddressValid: null,
             curAddress2: '',
-            curAddress2Valid: null,
             curState: '',
-            curStateValid: null,
             curZip: '',
-            curZipValid: null,
-            curMLS: '',
-            curMLSValid: null
+            curMLS: ''
         }
     }
+
     handleCurAddress = (e) => {
         this.setState({
             curAddress: e.target.value
@@ -75,7 +69,9 @@ class SubjectForm extends React.Component {
     }
 
     handleSubmit = (e) => {
+
         e.preventDefault();
+
         let incomplete = (
             this.state.curAddress.length <= 0 ||
             this.state.curCity.length <= 0 ||
@@ -83,21 +79,19 @@ class SubjectForm extends React.Component {
             this.state.curZip.length <= 0);
 
         if (incomplete) {
-
+            // TODO: Error message 
         } else {
             this.props.dispatch(incrementProgress());
             this.props.dispatch(addSubject({
-                adddress: this.state.curAddress,
-                addresss2: this.state.curAddress2,
+                address: this.state.curAddress,
+                address2: this.state.curAddress2,
                 city: this.state.curCity,
                 state: this.state.curState,
                 zip: this.state.curZip,
                 mls: this.state.curMLS
             }));
         }
-
     }
-
 
     render() {
         return (
@@ -110,53 +104,112 @@ class SubjectForm extends React.Component {
                         <Form>
                             <ListGroup flush>
                                 <ListGroupItem className="p-3">
-
-                                    {/* Address */}
-                                    <FormGroup>
-                                        <label htmlFor="feInputAddress">Subject Address</label>
-                                        <FormInput onChange={this.handleCurAddress} id="feInputAddress" required />
-                                    </FormGroup>
-
-                                    {/* Address2 */}
-                                    <FormGroup>
-                                        <label htmlFor="feInputAddress2">Subject Address 2</label>
-                                        <FormInput onChange={this.handleCurAddress2} id="feInputAddress2"/>
-                                    </FormGroup>
-
                                     <Row form>
+                                        {
+                                            this.props.locked === true ? (
+                                                <React.Fragment>
+                                                    {/* // Address */}
+                                                    <Col md="6" className="form-group">
+                                                        <FormGroup>
+                                                            <label htmlFor="feInputAddress">Subject Address</label>
+                                                            <FormInput disabled valid value={this.props.address} id="feInputAddress" required />
+                                                        </FormGroup>
+                                                    </Col>
 
-                                        {/* CITY */}
-                                        <Col md="6" className="form-group">
-                                            <label htmlFor="feInputCity">City</label>
-                                            <FormInput onChange={this.handleCurCity} id="feInputCity" required />
-                                        </Col>
+                                                    {/* // Address2 */}
+                                                    <Col md="6" className="form-group">
+                                                        <FormGroup>
+                                                            <label htmlFor="feInputAddress2">Subject Address 2</label>
+                                                            <FormInput disabled valid value={this.props.address2} id="feInputAddress2" />
+                                                        </FormGroup>
+                                                    </Col>
 
-                                        {/* STATE */}
-                                        <Col md="4" className="form-group">
-                                            <label htmlFor="feInputState">State</label>
-                                            <FormSelect onChange={this.handleCurState} id="feInputState" required>
-                                                <option>Choose...</option>
-                                                <option>PA</option>
-                                                <option>NJ</option>
-                                            </FormSelect>
-                                        </Col>
+                                                    {/* // CITY */}
+                                                    <Col md="6" className="form-group">
+                                                        <label htmlFor="feInputCity">City</label>
+                                                        <FormInput disabled valid value={this.props.city} id="feInputCity" required />
+                                                    </Col>
 
-                                        {/* ZIP */}
-                                        <Col md="2" className="form-group">
-                                            <label htmlFor="feInputZip">Zip</label>
-                                            <FormInput onChange={this.handleCurZip} id="feInputZip" required />
-                                        </Col>
+                                                    {/* // STATE */}
+                                                    <Col md="4" className="form-group">
+                                                        <label htmlFor="feInputState">State</label>
+                                                        <FormSelect disabled valid value={this.props.state} id="feInputState" required>
+                                                            <option>Choose...</option>
+                                                            <option>PA</option>
+                                                            <option>NJ</option>
+                                                        </FormSelect>
+                                                    </Col>
 
-                                        {/* MLS */}
-                                        <Col md="12" className="form-group">
-                                            <label htmlFor="feMLSNumber">MLS Number</label>
-                                            <FormInput onChange={this.handleCurMLS} placeholder="optional" id="feMLSNumber"/>
-                                        </Col>
+                                                    {/* // ZIP */}
+                                                    <Col md="2" className="form-group">
+                                                        <label htmlFor="feInputZip">Zip</label>
+                                                        <FormInput disabled valid value={this.props.zip} id="feInputZip" required />
+                                                    </Col>
+
+                                                    {/* // MLS */}
+                                                    <Col md="12" className="form-group">
+                                                        <label htmlFor="feMLSNumber">MLS Number</label>
+                                                        <FormInput disabled valid value={this.props.mls} placeholder="optional" id="feMLSNumber" />
+                                                        <FormFeedback valid>A valid subject has been added.</FormFeedback>
+                                                    </Col></React.Fragment>)
+                                                : (<React.Fragment>
+
+                                                    <Col md="6" className="form-group">
+                                                        {/* // Address */}
+                                                        <FormGroup>
+                                                            <label htmlFor="feInputAddress">Subject Address</label>
+                                                            <FormInput onChange={this.handleCurAddress} id="feInputAddress" required />
+                                                        </FormGroup>
+                                                    </Col>
+
+                                                    <Col md="6" className="form-group">
+                                                        {/* // Address2 */}
+                                                        <FormGroup>
+                                                            <label htmlFor="feInputAddress2">Subject Address 2</label>
+                                                            <FormInput onChange={this.handleCurAddress2} id="feInputAddress2" />
+                                                        </FormGroup>
+                                                    </Col>
+
+                                                    {/* // City */}
+                                                    <Col md="6" className="form-group">
+                                                        <label htmlFor="feInputCity">City</label>
+                                                        <FormInput onChange={this.handleCurCity} id="feInputCity" required />
+                                                    </Col>
+
+                                                    {/* // STATE */}
+                                                    <Col md="4" className="form-group">
+                                                        <label htmlFor="feInputState">State</label>
+                                                        <FormSelect onChange={this.handleCurState} id="feInputState" required>
+                                                            <option>Choose...</option>
+                                                            <option>PA</option>
+                                                            <option>NJ</option>
+                                                        </FormSelect>
+                                                    </Col>
+
+                                                    {/* // ZIP */}
+                                                    <Col md="2" className="form-group">
+                                                        <label htmlFor="feInputZip">Zip</label>
+                                                        <FormInput onChange={this.handleCurZip} id="feInputZip" required />
+                                                    </Col>
+
+                                                    {/* // MLS */}
+                                                    <Col md="12" className="form-group">
+                                                        <label htmlFor="feMLSNumber">MLS Number</label>
+                                                        <FormInput onChange={this.handleCurMLS} placeholder="optional" id="feMLSNumber" />
+                                                    </Col>
+                                                </React.Fragment>)
+                                        }
                                     </Row>
 
                                     {/* BUTTONS */}
                                     <Row>
-                                        <Col><Button theme="success" onClick={this.handleSubmit} type="submit">Add</Button></Col>
+                                        <Col>
+                                            {
+                                                this.props.locked === true ?
+                                                    (<Button size="sm" disabled theme="success" onClick={this.handleSubmit}>Add</Button>)
+                                                    : (<Button size="sm" theme="success" onClick={this.handleSubmit}>Add</Button>)
+                                            }
+                                        </Col>
                                         <Col>
                                             <NavButtons />
                                         </Col>
@@ -174,7 +227,11 @@ class SubjectForm extends React.Component {
 
 const mapStateToProps = (state) => {
     return ({
-        sub: state.report.subject
+        address: state.report.subject.address,
+        address2: state.report.subject.address2,
+        city: state.report.subject.city,
+        state: state.report.subject.state,
+        zip: state.report.subject.zip
     });
 }
 

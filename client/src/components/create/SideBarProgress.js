@@ -3,6 +3,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import ProgressItem from "./ProgressItem";
+import ProgressButtons from "./ProgressButtons";
+
 import {
   Card,
   CardHeader,
@@ -12,45 +15,56 @@ import {
   Button,
   Progress
 } from "shards-react";
-import { makeActiveReport } from "../../redux/actions/activeReportActions";
+
 
 class SidebarProgress extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      completion : 0,
-      clientComplete : false,
-      subjectComplete : false
-    }
-  }
-
-  static getDerivedStateFromProps(props, state){
-    if(props.client === ''){
-      return({
-        clientComplete : false
-      });
-    }
-    else if(props.client !== ''){
-      return ({
-        clientComplete : true
-      })
-    }
-  }
-
-  handlePublish = () => {
-    fetch('/api/getPDF')
-      .then(res => res.json())
-      .then(res => res.replace(/\\/g, ""))
-      .then(res => JSON.parse(res))
-      .then(res => this.props.dispatch(makeActiveReport(res.response)))
   }
 
   render() {
-    var saveDisabled = this.props.progress <= 0;
-    
-    // var publishDisabled = this.props.progress !== 100; //logic disabled for testing
-    var publishDisabled = false;
 
+    var promptName = [
+      {
+        name : "Client",
+        completed: this.props.clientComplete
+      },
+      {
+        name : "Subject",
+        completed: this.props.subjectComplete
+      },
+      {
+        name : "Comparables",
+        completed: this.props.comparablesComplete
+      },
+      {
+        name : "Conditions",
+        completed: this.props.conditionsComplete
+      },
+      {
+        name : "Sources",
+        completed: this.props.sourcesComplete
+      },
+      {
+        name : "Exposure",
+        completed: this.props.exposureComplete
+      },
+      {
+        name : "Value",
+        completed: this.props.valueComplete
+      },
+      {
+        name : "Date",
+        completed: this.props.dateComplete
+      },
+      {
+        name : "Scope",
+        completed: this.props.scopeComplete
+      }
+    ];
+  
+    // var progressList = promptName.map( (n, index) => <ProgressItem promptName={n} iconName="visibility" key={index} />);
+    
     return (
       <Card small className="mb-3">
         <CardHeader className="border-bottom">
@@ -74,110 +88,14 @@ class SidebarProgress extends React.Component {
 
             <ListGroupItem className="p-3">
 
-              <span className="d-flex mb-2">
-                <i className="material-icons mr-1">visibility</i>
-                <strong className="mr-1">Client:</strong>{" "}
-                <strong className={this.state.clientComplete ? "text-success" : "text-warning"}>{this.state.clientComplete ? "Complete" : "Incomplete"}</strong>{" "}
-                <a className="ml-auto" href="#">
-                  Edit
-              </a>
-              </span>
-
-              <span className="d-flex mb-2">
-                <i className="material-icons mr-1">visibility</i>
-                <strong className="mr-1">Subject:</strong>{" "}
-                <strong className={this.state.subjectComplete ? "text-success" : "text-warning"}>{this.state.subjectComplete ? "Complete" : "Incomplete"}</strong>{" "}
-                <a className="ml-auto" href="#">
-                  Edit
-              </a>
-              </span>
-
-              <span className="d-flex mb-2">
-                <i className="material-icons mr-1">visibility</i>
-                <strong className="mr-1">Comparables:</strong>{" "}
-                <strong className="text-warning">Incomplete</strong>{" "}
-                <a className="ml-auto" href="#">
-                  Edit
-              </a>
-              </span>
-
-              <span className="d-flex mb-2">
-                <i className="material-icons mr-1">visibility</i>
-                <strong className="mr-1">Conditions:</strong>{" "}
-                <strong className="text-warning">Incomplete</strong>{" "}
-                <a className="ml-auto" href="#">
-                  Edit
-              </a>
-              </span>
-
-              <span className="d-flex mb-2">
-                <i className="material-icons mr-1">visibility</i>
-                <strong className="mr-1">Sources:</strong>{" "}
-                <strong className="text-warning">Incomplete</strong>{" "}
-                <a className="ml-auto" href="#">
-                  Edit
-              </a>
-              </span>
-
-              <span className="d-flex mb-2">
-                <i className="material-icons mr-1">visibility</i>
-                <strong className="mr-1">Exposure:</strong>{" "}
-                <strong className="text-warning">Incomplete</strong>{" "}
-                <a className="ml-auto" href="#">
-                  Edit
-              </a>
-              </span>
-
-              <span className="d-flex mb-2">
-                <i className="material-icons mr-1">visibility</i>
-                <strong className="mr-1">Value:</strong>{" "}
-                <strong className="text-warning">Incomplete</strong>{" "}
-                <a className="ml-auto" href="#">
-                  Edit
-              </a>
-              </span>
-
-              <span className="d-flex mb-2">
-                <i className="material-icons mr-1">visibility</i>
-                <strong className="mr-1">Date:</strong>{" "}
-                <strong className="text-warning">Incomplete</strong>{" "}
-                <a className="ml-auto" href="#">
-                  Edit
-              </a>
-              </span>
-
-              <span className="d-flex mb-2">
-                <i className="material-icons mr-1">visibility</i>
-                <strong className="mr-1">Scope:</strong>{" "}
-                <strong className="text-warning">Incomplete</strong>{" "}
-                <a className="ml-auto" href="#">
-                  Edit
-              </a>
-              </span>
-
-              <span className="d-flex mb-2">
-                <i className="material-icons mr-1">visibility</i>
-                <strong className="mr-1">Conditions:</strong>{" "}
-                <strong className="text-warning">Incomplete</strong>{" "}
-                <a className="ml-auto" href="#">
-                  Edit
-              </a>
-              </span>
-
+              {/* Geneate a list of ProgressItems and conditionally format their completion status */}
+              {promptName.map( (n, index) => <ProgressItem promptName={n.name} iconName="visibility" key={index} completed={n.completed}/>)}
 
             </ListGroupItem>
 
-            <ListGroupItem className="d-flex px-3">
+              {/* Save Draft and Publish Buttons */}
+              <ProgressButtons />
 
-              {saveDisabled === true ? 
-                (<Button outline  disabled theme="accent" size="sm"><i className="material-icons">save</i> Save Draft</Button>)
-                : (<Button outline theme="accent" size="sm"><i className="material-icons">save</i> Save Draft</Button>)}
-
-              {publishDisabled === true ? 
-                (<Button disabled theme="accent" size="sm" className="ml-auto"><i className="material-icons">file_copy</i> Publish</Button>)
-                : (<Button onClick={this.handlePublish} theme="accent" size="sm" className="ml-auto"><i className="material-icons">file_copy</i> Publish</Button>)}
-
-            </ListGroupItem>
           </ListGroup>
         </CardBody>
       </Card>
@@ -188,8 +106,81 @@ class SidebarProgress extends React.Component {
 const mapStateToProps = (state) => {
   return ({
     progress : state.wizard.progress,
-    client : state.report.client
+    clientComplete: state.report.client,
+    subjectComplete: state.report.subjectComplete,
+    comparablesComplete: state.report.comparablesComplete,
+    marketComplete: state.report.marketComplete,
+    conditionsComplete: state.report.conditionsComplete,
+    sourcesComplete: state.report.sourcesComplete,
+    exposureComplete: state.report.exposureComplete,
+    valueComplete: state.report.valueComplete,
+    dateComplete: state.report.dateComplete,
+    scopeComplete: state.report.scopeComplete
   })
 }
 
 export default connect(mapStateToProps)(SidebarProgress);
+
+// pdfData: {
+//   client: 'n.a.',
+  
+//   subject: null,
+//   inspect: "none",
+//   propType: "Single Family Residential",
+
+//   subjectHistory : 'n.a.',
+//   owner : 'n.a.',
+//   fuel : 'n.a.',
+//   parking: 'n.a.',
+//   heating : 'n.a.',
+//   airCond : 'n.a.',
+//   yearBuilt : 'n.a.',
+//   bedCount : 'n.a.',
+//   bathCount : 'n.a.',
+//   gla : 'n.a.',
+//   architecture : 'n.a.',
+//   legalDes: 'n.a.',
+//   mlsNumber : 'n.a.', 
+//   marketConditions : 'n.a.',
+//   additionalTransfers : 'n.a.',
+
+//   comp1: 'n.a.',
+//   comp1_GLA: 'n.a.',
+//   comp1_LastPrice: 'n.a.',
+//   comp1_LastDate: 'n.a.',
+//   comp1_MLS: 'n.a.',
+//   comp1_BedBath : 'n.a.',
+
+//   comp2: 'n.a.',
+//   comp2_GLA: 'n.a.',
+//   comp2_LastPrice: 'n.a.',
+//   comp2_LastDate: 'n.a.',
+//   comp2_MLS: 'n.a.',
+//   comp2_BedBath : 'n.a.',
+
+//   comp3: 'n.a.',
+//   comp3_GLA: 'n.a.',
+//   comp3_LastPrice: 'n.a.',
+//   comp3_LastDate: 'n.a.',
+//   comp3_MLS: 'n.a.',
+//   comp3_BedBath : 'n.a.',
+
+//   comp4: 'n.a.',
+//   comp4_GLA: 'n.a.',
+//   comp4_LastPrice: 'n.a.',
+//   comp4_LastDate: 'n.a.',
+//   comp4_MLS: 'n.a.',
+//   comp4_BedBath : 'n.a.',
+
+//   createdDate: 'n.a.',
+//   effectiveDate: 'n.a.',
+//   sigInitials: 'n.a.',
+
+//   recon: 'n.a.',
+//   rtMIN: 'n.a.',
+//   rtMAX: 'n.a.',
+
+//   price: 'n.a.',
+//   scopeCmmnt: 'n.a.',
+//   dataSource: 'n.a.'
+// },

@@ -35,17 +35,18 @@ const ReportWizard = (props) => (
       <Row>
         <Col lg="8" className="mb-4">
 
-          {/* RENDER PROMPT MATCHING props.activePrompt */}
-          {props.activePrompt === 0 ? <ClientForm /> : " "}
-          {props.activePrompt === 1 ? <SubjectForm /> : " "}
-          {props.activePrompt === 2 ? <CompForm /> : " "}
-          {props.activePrompt === 3 ? <MarketConditionsForm /> : " "}
-          {props.activePrompt === 4 ? <DataSourcesForm /> : " "}
-          {props.activePrompt === 5 ? <ExposureTimeForm /> : " "}
-          {props.activePrompt === 6 ? <ValueForm /> : " "}
-          {props.activePrompt === 7 ? <DateForm /> : " "}
-          {props.activePrompt === 8 ? <ScopeForm /> : " "}
-          {props.activePrompt === 9 ? <LimitingConditionsForm /> : " "}
+          {/* RENDER THE PROMPT MATCHING: props.activePrompt */}
+          {/* lock the prompt if it has been completed */}
+          {props.activePrompt === 0 ? <ClientForm locked={props.clientComplete} /> : " "}
+          {props.activePrompt === 1 ? <SubjectForm locked={props.subjectComplete} /> : " "}
+          {props.activePrompt === 2 ? <CompForm locked={props.comparablesComplete} /> : " "}
+          {props.activePrompt === 3 ? <MarketConditionsForm locked={props.marketComplete} /> : " "}
+          {props.activePrompt === 4 ? <DataSourcesForm locked={props.dateComplete} /> : " "}
+          {props.activePrompt === 5 ? <ExposureTimeForm locked={props.exposureComplete} /> : " "}
+          {props.activePrompt === 6 ? <ValueForm locked={props.valueComplete} /> : " "}
+          {props.activePrompt === 7 ? <DateForm locked={props.dateComplete} /> : " "}
+          {props.activePrompt === 8 ? <ScopeForm locked={props.scopeComplete} /> : " "}
+          {props.activePrompt === 9 ? <LimitingConditionsForm locked={props.conditionsComplete} /> : " "}
 
         </Col>
         <Col lg="4" className="mb-4">
@@ -58,7 +59,17 @@ const ReportWizard = (props) => (
 
 const mapStateToProps = (state) => {
   return ({
-    activePrompt: state.activePrompt.activePrompt
+    activePrompt: state.activePrompt.activePrompt,          // index of prompt to display
+    clientComplete: state.report.clientComplete,            // completion status for each prompt
+    subjectComplete: state.report.subjectComplete,
+    comparablesComplete: state.report.comparablesComplete,
+    marketComplete: state.report.marketComplete,
+    conditionsComplete: state.report.conditionsComplete,
+    sourcesComplete: state.report.sourcesComplete,
+    exposureComplete: state.report.exposureComplete,
+    valueComplete: state.report.valueComplete,
+    dateComplete: state.report.dateComplete,
+    scopeComplete: state.report.scopeComplete
   });
 }
 

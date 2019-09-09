@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { addClient } from "../../redux/actions/reportActions";
 import { incrementProgress } from "../../redux/actions/wizardActions";
 import NavButtons from "./NavButtons";
+
 import {
     ListGroup,
     ListGroupItem,
@@ -73,27 +74,33 @@ class ClientForm extends React.Component {
                                         <Col md="12" className="form-group">
                                             {/* <label htmlFor="feClientName">Client</label> */}
 
-                                            {this.props.name.length > 0 ?
-                                                <FormInput
+                                            {
+                                                this.props.locked === true ?
+                                                (<FormInput
                                                     required
                                                     disabled
                                                     valid
                                                     id="feClientName"
                                                     value={this.props.name}
                                                     onChange={this.handleChange}
-                                                />
-                                                : <FormInput
+                                                />)
+                                                : (<FormInput
                                                     required
                                                     id="feClientName"
                                                     onChange={this.handleChange}
-                                                />}
+                                                />)
+                                            }
 
-                                            <FormFeedback valid>valid client</FormFeedback>
+                                            <FormFeedback valid>A valid client has been added.</FormFeedback>
                                         </Col>
                                     </Row>
                                     <Row>
                                         <Col>
-                                            <Button size="sm" theme="success" onClick={this.handleAdd}>Add</Button>
+                                            {
+                                                this.props.locked === true ? 
+                                                (<Button size="sm" disabled theme="success" onClick={this.handleAdd}>Add</Button>)
+                                                : (<Button size="sm" theme="success" onClick={this.handleAdd}>Add</Button>)
+                                            }
                                         </Col>
                                         <Col>
                                             <NavButtons />
