@@ -11,10 +11,10 @@ import {
     Form,
     Card,
     CardHeader,
-    FormInput,
-    FormGroup,
-    FormCheckbox,
-    FormSelect,
+    // FormInput,
+    // FormGroup,
+    // FormCheckbox,
+    // FormSelect,
     FormFeedback,
     Button
 } from "shards-react";
@@ -32,7 +32,7 @@ class LimitingConditionsForm extends React.Component {
 
     handleAdd = (e) => {
         e.preventDefault();
-        if (this.state.market.length > 0) {
+        if (this.state.conditions.length > 0) {
             this.props.dispatch(addConditions(this.state.conditions));
             this.props.dispatch(incrementProgress());
         }
@@ -96,4 +96,4 @@ const mapStateToProps = (state) => {
     });
 }
 
-export default connect()(LimitingConditionsForm);
+export default connect(mapStateToProps)(LimitingConditionsForm);

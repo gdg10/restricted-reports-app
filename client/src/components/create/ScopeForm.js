@@ -32,7 +32,7 @@ class ScopeForm extends React.Component {
 
     handleAdd = (e) => {
         e.preventDefault();
-        if (this.state.market.length > 0) {
+        if (this.state.scope.length > 0) {
             this.props.dispatch(addScope(this.state.scope));
             this.props.dispatch(incrementProgress());
         }
@@ -40,7 +40,7 @@ class ScopeForm extends React.Component {
 
     handleChange = (e) => {
         this.setState({
-            market: e.target.value
+            scope: e.target.value
         });
     }
 

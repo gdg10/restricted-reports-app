@@ -45,3 +45,21 @@ export const addConditions = (conditions) => ({
 export const removeConditions = () => ({
     type: "REM_CONDITIONS"
 })
+
+export const addExposure = (exposure) => ({
+    type: "ADD_EXPOSURE",
+    payload: exposure
+})
+
+export const removeExposure = () => ({
+    type: "REM_EXPOSURE"
+})
+
+export const addValue = (value) => ({
+    type: "ADD_VALUE",
+    payload: value
+})
+
+export const removeValue = () => ({
+    type: "REM_VALUE"
+})
