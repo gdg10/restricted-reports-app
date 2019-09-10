@@ -12,7 +12,6 @@ import {
     Form,
     FormInput,
     FormGroup,
-    FormCheckbox,
     Card,
     CardHeader,
     FormSelect,
@@ -125,13 +124,13 @@ class CompForm extends React.Component {
                                             <Col md='6'>
                                                 <FormGroup className="">
                                                     <label htmlFor="feInputAddress">Address</label>
-                                                    <FormInput onChange={this.handleCurAddress} id="feInputAddress" required />
+                                                    {this.props.locked ? ( <FormInput disabled valid id="feInputAddress" required />):( <FormInput onChange={this.handleCurAddress} id="feInputAddress" required />)}
                                                 </FormGroup>
                                             </Col>
                                             <Col md='6'>
                                                 <FormGroup className="">
                                                     <label htmlFor="feInputAddress2">Address Line 2</label>
-                                                    <FormInput onChange={this.handleCurAddress2} id="feInputAddress2" />
+                                                    {this.props.locked ? (<FormInput disabled valid id="feInputAddress2" />) : (<FormInput onChange={this.handleCurAddress2} id="feInputAddress2" />) }
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -139,27 +138,35 @@ class CompForm extends React.Component {
                                         <Row form>
                                             <Col md="6" className="form-group">
                                                 <label htmlFor="feInputCity">City</label>
-                                                <FormInput onChange={this.handleCurCity} id="feInputCity" required />
+                                                {this.props.locked ? (<FormInput disabled valid id="feInputCity" required />) : (<FormInput onChange={this.handleCurCity} id="feInputCity" required />)}
                                             </Col>
                                             <Col md="2" className="form-group">
                                                 <label htmlFor="feInputState">State</label>
+                                                {this.props.locked ? (                                                
+                                                <FormSelect disabled valid id="feInputState" required>
+                                                    <option>Select...</option>
+                                                    <option>PA</option>
+                                                    <option>NJ</option>
+                                                </FormSelect>) : (                                                
                                                 <FormSelect id="feInputState" onChange={this.handleCurState} required>
                                                     <option>Select...</option>
                                                     <option>PA</option>
                                                     <option>NJ</option>
-                                                </FormSelect>
+                                                </FormSelect>)}
                                             </Col>
                                             <Col md="2" className="form-group">
                                                 <label htmlFor="feInputZip">ZIP</label>
-                                                <FormInput onChange={this.handleCurZip} id="feInputZip" required />
+                                                {this.props.locked ? (<FormInput valid disabled id="feInputZip" required />):(<FormInput onChange={this.handleCurZip} id="feInputZip" required />)}
                                             </Col>
                                             <Col md="2" className="form-group">
                                                 <label htmlFor="feMLSNumber">MLS#</label>
-                                                <FormInput onChange={this.handleCurMLS} id="feMLSNumber" placeholder="optional" />
+                                                {this.props.locked ? (<FormInput valid disabled id="feMLSNumber" placeholder="optional" />) : (<FormInput onChange={this.handleCurMLS} id="feMLSNumber" placeholder="optional" />)}
                                             </Col>
                                         </Row>
                                         <Row>
-                                            <Col><Button theme="success" onClick={this.handleSubmit} type="submit">Add Comparable</Button></Col>
+                                            <Col>
+                                            {this.props.locked ? ( <Button theme="success" disabled type="submit">Add Comparable</Button>):( <Button theme="success" onClick={this.handleSubmit} type="submit">Add Comparable</Button>)}
+                                            </Col>
                                             <Col><NavButtons /></Col>
                                         </Row>
                                     </ListGroupItem>
