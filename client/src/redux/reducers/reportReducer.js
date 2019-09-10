@@ -21,8 +21,9 @@ const initialState = {
     exposureTimeMax: '',
     exposureComplete: false,
 
-    valueMin: '',
-    valueMax: '',
+    minVal: '',
+    maxVal: '',
+    rec: '',
     valueComplete: false,
 
     dateMin: '',
@@ -31,7 +32,6 @@ const initialState = {
 
     scope: '',
     scopeComplete: false,
-
 }
 
 const report = (state = initialState, action) => {
@@ -41,27 +41,46 @@ const report = (state = initialState, action) => {
             newState.client = action.payload;
             newState.clientComplete = true;
             return newState;
+
         case 'ADD_SUBJECT':
             newState.subject = action.payload;
             newState.subjectComplete = true;
             return newState;
+
         case 'ADD_COMP':
             newState.comparables.push(action.payload);
             return newState;
         case 'REMOVE_COMP':
             return ({ comparables: state.comparables.splice(action.payload) });
+
         case 'ADD_MARKET':
             newState.market = action.payload;
             newState.marketComplete = true;
             return newState;
+
         case 'ADD_SCOPE':
             newState.scope = action.payload;
             newState.scopeComplete = true;
             return newState;
+            
         case 'ADD_CONDITIONS':
             newState.conditions = action.payload;
             newState.conditionsComplete = true;
             return newState;
+
+        case 'ADD_EXPOSURE':
+            newState.exposureTimeMin = action.payload.eMin;
+            newState.exposureTimeMax = action.payload.eMax;
+            newState.exposureComplete = true;
+            return newState;
+
+        case 'ADD_VALUE':
+            newState.minVal = action.payload.minVal;
+            newState.maxVal = action.payload.maxVal;
+            newState.rec = action.payload.rec;
+            newState.valueComplete = true;
+            return newState;
+        
         default:
             return state;
     }
