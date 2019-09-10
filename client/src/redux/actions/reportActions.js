@@ -63,3 +63,13 @@ export const addValue = (value) => ({
 export const removeValue = () => ({
     type: "REM_VALUE"
 })
+
+export const addDate = (date) => ({
+    type : 'ADD_DATE',
+    payload : date
+})
+
+export const addSources = (sources) => ({
+    type : 'ADD_SOURCES',
+    payload : sources
+})

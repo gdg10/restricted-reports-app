@@ -1,5 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
+import { addSources } from "../../redux/actions/reportActions";
+import { incrementProgress } from "../../redux/actions/wizardActions";
 import {
     ListGroup,
     ListGroupItem,
@@ -23,21 +25,23 @@ class DataSourcesForm extends React.Component {
     }
 
     handleAdd = (e) => {
-        // e.preventDefault();
-        let isValid = false;
+        e.preventDefault();
         if (this.state.sources.length > 0) {
-            isValid = true;
+            this.props.dispatch(addSources(this.state.sources + 'Estated API'));
+            this.props.dispatch(incrementProgress());
         }
-
-        this.setState({
-            valid: isValid
-        });
     }
 
     handleChange = (e) => {
-        this.setState({
-            sources: e.target.value
-        });
+        if (this.state.sources.includes(e.target.value)){
+            this.setState({
+                sources: this.state.sources.replace(e.target.value + ', ', '')
+            });
+        }else{
+            this.setState({
+                sources: this.state.sources + e.target.value + ', '
+            });
+        }
     }
 
     render() {
@@ -54,21 +58,21 @@ class DataSourcesForm extends React.Component {
                                     <Row form>
                                         <Col md="4" className="form-group">
                                             <fieldset>
-                                                <FormCheckbox onChange={this.handleChange}>MLS</FormCheckbox>
-                                                <FormCheckbox onChange={this.handleChange}>Inspection</FormCheckbox>
+                                                <FormCheckbox onChange={this.handleChange} value="MLS">MLS</FormCheckbox>
+                                                <FormCheckbox onChange={this.handleChange} value="Inspection">Inspection</FormCheckbox>
                                             </fieldset>
                                         </Col>
 
                                         <Col md="4" className="form-group">
                                             <fieldset>
-                                                <FormCheckbox onChange={this.handleChange}>Appraiser</FormCheckbox>
-                                                <FormCheckbox onChange={this.handleChange}>Public Records</FormCheckbox>
+                                                <FormCheckbox onChange={this.handleChange} value="Appraiser">Appraiser</FormCheckbox>
+                                                <FormCheckbox onChange={this.handleChange} value="Public Records">Public Records</FormCheckbox>
                                             </fieldset>
                                         </Col>
                                         <Col md="4" className="form-group">
                                             <fieldset>
-                                                <FormCheckbox onChange={this.handleChange}>Home Owner</FormCheckbox>
-                                                <FormCheckbox onChange={this.handleChange}>Other</FormCheckbox>
+                                                <FormCheckbox onChange={this.handleChange} value="Home Owner">Home Owner</FormCheckbox>
+                                                <FormCheckbox onChange={this.handleChange} value="Other" >Other</FormCheckbox>
                                             </fieldset>
                                         </Col>
                                     </Row>

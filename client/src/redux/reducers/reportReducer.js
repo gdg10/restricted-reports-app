@@ -26,8 +26,8 @@ const initialState = {
     rec: '',
     valueComplete: false,
 
-    dateMin: '',
-    dateMax: '',
+    createDate: '',
+    effectiveDate: '',
     dateComplete: false,
 
     scope: '',
@@ -81,6 +81,17 @@ const report = (state = initialState, action) => {
             newState.valueComplete = true;
             return newState;
         
+        case 'ADD_DATE':
+            newState.createDate = action.payload.createDate;
+            newState.effectiveDate = action.payload.effectiveDate;
+            newState.dateComplete = true;
+            return newState;
+
+        case 'ADD_SOURCES':
+            newState.sources = action.payload;
+            newState.sourcesComplete = true;
+            return newState;
+
         default:
             return state;
     }
