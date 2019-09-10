@@ -11,6 +11,7 @@ import {
     Card,
     CardHeader,
     FormCheckbox,
+    FormFeedback,
     Button
 } from "shards-react";
 import NavButtons from "./NavButtons";
@@ -55,7 +56,30 @@ class DataSourcesForm extends React.Component {
                         <Form>
                             <ListGroup flush>
                                 <ListGroupItem className="p-3">
+                                    {this.props.locked ? (
                                     <Row form>
+                                        <Col md="4" className="form-group">
+                                            <fieldset>
+                                                <FormCheckbox valid disabled value="MLS">MLS</FormCheckbox>
+                                                <FormCheckbox valid disabled value="Inspection">Inspection</FormCheckbox>
+                                            </fieldset>
+                                        </Col>
+
+                                        <Col md="4" className="form-group">
+                                            <fieldset>
+                                                <FormCheckbox valid disabled value="Appraiser">Appraiser</FormCheckbox>
+                                                <FormCheckbox valid disabled value="Public Records">Public Records</FormCheckbox>
+                                            </fieldset>
+                                        </Col>
+                                        <Col md="4" className="form-group">
+                                            <fieldset>
+                                                <FormCheckbox valid disabled value="Home Owner">Home Owner</FormCheckbox>
+                                                <FormCheckbox valid disabled value="Other" >Other</FormCheckbox>
+                                            </fieldset>
+                                        </Col>
+                                        <Row><Col className="m-2"><h9 theme="success">Valid selection: {this.props.sources}</h9></Col></Row>
+                                    </Row>)
+                                    : (<Row form>
                                         <Col md="4" className="form-group">
                                             <fieldset>
                                                 <FormCheckbox onChange={this.handleChange} value="MLS">MLS</FormCheckbox>
@@ -75,9 +99,14 @@ class DataSourcesForm extends React.Component {
                                                 <FormCheckbox onChange={this.handleChange} value="Other" >Other</FormCheckbox>
                                             </fieldset>
                                         </Col>
-                                    </Row>
+                                    </Row>)}
                                     <Row>
-                                        <Col><Button theme="success" onClick={this.handleAdd}>Add</Button></Col>
+                                        <Col> 
+                                            {
+                                                this.props.locked === true ? 
+                                                (<Button size="sm" disabled theme="success" onClick={this.handleAdd}>Add</Button>)
+                                                : (<Button size="sm" theme="success" onClick={this.handleAdd}>Add</Button>)
+                                            }</Col>
                                         <Col><NavButtons /></Col>
                                     </Row>
                                 </ListGroupItem>

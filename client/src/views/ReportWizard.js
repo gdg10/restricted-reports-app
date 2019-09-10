@@ -41,7 +41,7 @@ const ReportWizard = (props) => (
           {props.activePrompt === 1 ? <SubjectForm locked={props.subjectComplete} /> : " "}
           {props.activePrompt === 2 ? <CompForm locked={props.comparablesComplete} /> : " "}
           {props.activePrompt === 3 ? <MarketConditionsForm locked={props.marketComplete} /> : " "}
-          {props.activePrompt === 4 ? <DataSourcesForm locked={props.dateComplete} /> : " "}
+          {props.activePrompt === 4 ? <DataSourcesForm locked={props.sourcesComplete} /> : " "}
           {props.activePrompt === 5 ? <ExposureTimeForm locked={props.exposureComplete} /> : " "}
           {props.activePrompt === 6 ? <ValueForm locked={props.valueComplete} /> : " "}
           {props.activePrompt === 7 ? <DateForm locked={props.dateComplete} /> : " "}
@@ -65,11 +65,11 @@ const mapStateToProps = (state) => {
     comparablesComplete: state.report.comparablesComplete,
     marketComplete: state.report.marketComplete,
     conditionsComplete: state.report.conditionsComplete,
-    sourcesComplete: state.report.sourcesComplete,
     exposureComplete: state.report.exposureComplete,
     valueComplete: state.report.valueComplete,
     dateComplete: state.report.dateComplete,
-    scopeComplete: state.report.scopeComplete
+    scopeComplete: state.report.scopeComplete,
+    sourcesComplete : state.report.sourcesComplete
   });
 }
 
