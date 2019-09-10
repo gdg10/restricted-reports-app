@@ -91,11 +91,12 @@ class CompForm extends React.Component {
             }));
 
             this.setState({
-                curAddress: '',
-                curAddress2: '',
-                curState: '',
-                curZip: '',
-                curMLS: '',
+                address: this.state.curAddress,
+                address2: this.state.curAddress2,
+                city: this.state.curCity,
+                state: this.state.curState,
+                zip: this.state.curZip,
+                mls: this.state.curMLS,
                 comparables: [{
                     address: this.state.curAddress,
                     address2: this.state.curAddress2,

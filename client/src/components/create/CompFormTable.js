@@ -33,7 +33,7 @@ class CompFormTable extends React.Component {
                 <thead className="bg-light">
                     <tr>
                         <th scope="col" className="border-0">#</th>
-                        <th scope="col" className="border-0"> Address</th>
+                        <th scope="col" className="border-0">Address</th>
                         <th scope="col" className="border-0">City</th>
                         <th scope="col" className="border-0">State</th>
                         <th scope="col" className="border-0">ZIP</th>
