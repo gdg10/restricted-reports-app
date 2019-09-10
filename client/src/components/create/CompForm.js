@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { addComp } from "../../redux/actions/reportActions";
 import NavButtons from "./NavButtons";
-import CompFormRow from "./CompFormRow";
+import CompFormTable from "./CompFormTable";
 
 import {
     ListGroup,
@@ -25,15 +25,12 @@ class CompForm extends React.Component {
         super(props);
         this.state = {
             curAddress: '',
-            curAddressValid: null,
             curAddress2: '',
-            curAddress2Valid: null,
             curState: '',
-            curStateValid: null,
             curZip: '',
-            curZipValid: null,
             curMLS: '',
-            curMLSValid: null
+            comparables: [],
+            compCount: 0
         }
     }
 
@@ -92,8 +89,23 @@ class CompForm extends React.Component {
                 zip: this.state.curZip,
                 mls: this.state.curMLS
             }));
-        }
 
+            this.setState({
+                curAddress: '',
+                curAddress2: '',
+                curState: '',
+                curZip: '',
+                curMLS: '',
+                comparables: [{
+                    address: this.state.curAddress,
+                    address2: this.state.curAddress2,
+                    city: this.state.curCity,
+                    state: this.state.curState,
+                    zip: this.state.curZip,
+                    mls: this.state.curMLS
+                }].concat(this.state.comparables)
+            });
+        }
     }
 
     render() {
@@ -155,38 +167,10 @@ class CompForm extends React.Component {
                         </Col>
                     </Row>
                 </Card>
-
-                <Card small className="mb-4">
-                    <CardHeader className="border-bottom">
-                        <h6 className="m-0">Added ({this.props.comps.length})</h6>
-                    </CardHeader>
-                    <table className="table mb-0">
-                        <thead className="bg-light">
-                            <tr>
-                                <th scope="col" className="border-0">#</th>
-                                <th scope="col" className="border-0"> Address</th>
-                                <th scope="col" className="border-0">City</th>
-                                <th scope="col" className="border-0">State</th>
-                                <th scope="col" className="border-0">ZIP</th>
-                                <th scope="col" className="border-0">MLS Number</th>
-                                <th scope="col" className="border-0">Remove</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            { this.props.comps.map( (n, index) => <CompFormRow comp={n} number={index} key={index}/>) }
-                            {/* {<CompFormRow key={index} /> */}
-                        </tbody>
-                    </table>
-                </Card>
+                <CompFormTable />
             </React.Fragment>
-                )
-            }
-        }
-        
-const mapStateToProps = (state) => {
-    return ({
-        comps : state.report.comparables
-    }); 
+        )
+    }
 }
 
-export default connect(mapStateToProps)(CompForm);
+export default connect()(CompForm);

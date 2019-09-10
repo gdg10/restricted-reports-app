@@ -50,8 +50,9 @@ const report = (state = initialState, action) => {
         case 'ADD_COMP':
             newState.comparables.push(action.payload);
             return newState;
-        case 'REMOVE_COMP':
-            return ({ comparables: state.comparables.splice(action.payload) });
+        case 'REM_COMP':
+            newState.comparables.splice(action.payload, 1);
+            return newState;
 
         case 'ADD_MARKET':
             newState.market = action.payload;

@@ -4,12 +4,12 @@ import { removeComp } from "../../redux/actions/reportActions"
 import { Button } from "shards-react";
 
 // TABLE ROW DISPLAYING A SALES COMPARABLE
-const CompFromRow = (props) => {
+const CompFormRow = (props) => {
     return (
         <tr>
 
             {/* COMP INFO */}
-            <td>{props.number}</td>
+            <td>{props.number + 1}</td>
             <td>{props.comp.address + props.comp.address2}</td>
             <td>{props.comp.city}</td>
             <td>{props.comp.state}</td>
@@ -20,10 +20,10 @@ const CompFromRow = (props) => {
             <td>
                 <Button outline onClick={()=>{
                         props.dispatch(removeComp(props.number))
-                    }} theme="danger" small>remove</Button>
+                    }} theme="danger">remove</Button>
             </td>
         </tr>
     )
 }
 
-export default connect()(CompFromRow);
+export default connect()(CompFormRow);
