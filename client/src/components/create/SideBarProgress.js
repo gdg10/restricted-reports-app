@@ -27,43 +27,53 @@ class SidebarProgress extends React.Component {
     var promptName = [
       {
         name : "Client",
-        completed: this.props.clientComplete
+        completed: this.props.clientComplete,
+        promptIndex : 0
       },
       {
         name : "Subject",
-        completed: this.props.subjectComplete
+        completed: this.props.subjectComplete,
+        promptIndex : 1
       },
       {
         name : "Comparables",
-        completed: this.props.comparablesComplete
+        completed: this.props.comparablesComplete,
+        promptIndex : 2
       },
       {
         name : "Market",
-        completed: this.props.marketComplete
+        completed: this.props.marketComplete,
+        promptIndex : 3
       },
       {
         name : "Sources",
-        completed: this.props.sourcesComplete
+        completed: this.props.sourcesComplete,
+        promptIndex : 4
       },
       {
         name : "Exposure",
-        completed: this.props.exposureComplete
+        completed: this.props.exposureComplete,
+        promptIndex : 5
       },
       {
         name : "Value",
-        completed: this.props.valueComplete
+        completed: this.props.valueComplete,
+        promptIndex : 6
       },
       {
         name : "Date",
-        completed: this.props.dateComplete
+        completed: this.props.dateComplete,
+        promptIndex : 7
       },
       {
         name : "Scope",
-        completed: this.props.scopeComplete
+        completed: this.props.scopeComplete,
+        promptIndex : 8
       },
       {
         name : "Conditions",
-        completed: this.props.conditionsComplete
+        completed: this.props.conditionsComplete,
+        promptIndex : 9
       }
     ];
   
@@ -93,7 +103,7 @@ class SidebarProgress extends React.Component {
             <ListGroupItem className="p-3">
 
               {/* Geneate a list of ProgressItems and conditionally format their completion status */}
-              {promptName.map( (n, index) => <ProgressItem promptName={n.name} iconName="visibility" key={index} completed={n.completed}/>)}
+              {promptName.map( (n, index) => <ProgressItem promptName={n.name} promptIndex={n.promptIndex} iconName="visibility" key={index} completed={n.completed}/>)}
 
             </ListGroupItem>
 

@@ -21,11 +21,6 @@ const activePrompt = (state = initialState, action) => {
                     return ({activePrompt : 9}); //otherwise, wrap around to end
                 }
         case 'JUMP_TO_PROMPT':
-                if(state.activePrompt >= MIN_INDEX && state.activePrompt <= MAX_INDEX){
-                    return ({activePrompt : state.activePrompt - 1});
-                }else{
-                    return state;
-                }
             return ({activePrompt : action.payload});
         default:
             return state;
