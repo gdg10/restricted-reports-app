@@ -49,9 +49,15 @@ const report = (state = initialState, action) => {
 
         case 'ADD_COMP':
             newState.comparables.push(action.payload);
+            if(newState.comparables.length >= 4){
+                newState.comparablesComplete = true;
+            }
             return newState;
         case 'REM_COMP':
             newState.comparables.splice(action.payload, 1);
+            if(newState.comparables.length < 4){
+                newState.comparablesComplete = false;
+            }
             return newState;
 
         case 'ADD_MARKET':
