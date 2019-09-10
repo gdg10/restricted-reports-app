@@ -1,7 +1,7 @@
 import React from "react";
 import NavButtons from "./NavButtons";
 import { connect } from "react-redux";
-import { addMarket } from "../../redux/actions/reportActions";
+import { addDate } from "../../redux/actions/reportActions";
 import { incrementProgress } from "../../redux/actions/wizardActions";
 import {
     ListGroup,
@@ -12,9 +12,9 @@ import {
     Card,
     CardHeader,
     FormInput,
-    FormGroup,
-    FormCheckbox,
-    FormSelect,
+    // FormGroup,
+    // FormCheckbox,
+    // FormSelect,
     FormFeedback,
     Button
 } from "shards-react";
@@ -26,21 +26,32 @@ class DateForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            market: ''
+            createDate: '',
+            effectiveDate: ''
         }
     }
 
     handleAdd = (e) => {
         e.preventDefault();
-        if (this.state.market.length > 0) {
-            this.props.dispatch(addMarket(this.state.market));
+        if (this.state.createDate != '' && this.state.effectiveDate != '') {
+            this.props.dispatch(
+                addDate({
+                    createDate: this.state.createDate,
+                    effectiveDate: this.state.effectiveDate
+                }));
             this.props.dispatch(incrementProgress());
         }
     }
 
-    handleChange = (e) => {
+    handleCreateChange = (e) => {
         this.setState({
-            market: e.target.value
+            createDate: e.target.value
+        });
+    }
+
+    handleEffectiveChange = (e) => {
+        this.setState({
+            effectiveDate: e.target.value
         });
     }
 
@@ -60,20 +71,31 @@ class DateForm extends React.Component {
                                         <Col md="6" className="form-group">
                                             <div className="form-group">
                                                 <label for="crt">Create Date</label>
-                                                <input type="date" className="form-control" id="crt"></input>
+                                                {this.props.locked ?
+                                                    (<FormInput valid disabled value={this.props.createDate} type="date" className="form-control" id="crt"></FormInput>)
+                                                    : (<FormInput onChange={this.handleCreateChange} type="date" className="form-control" id="crt"></FormInput>)}
+
                                             </div>
                                         </Col>
                                         <Col md="6" className="form-group">
                                             <div className="form-group">
                                                 <label for="usr">Effective Date</label>
-                                                <input type="date" className="form-control" id="usr"></input>
+                                                {this.props.locked ?
+                                                    (<FormInput valid disabled value={this.props.effectiveDate} type="date" className="form-control" id="usr"></FormInput>)
+                                                    : (<FormInput onChange={this.handleEffectiveChange} type="date" className="form-control" id="usr"></FormInput>)}
                                             </div>
                                         </Col>
                                     </Row>
 
                                     {/* BUTTONS */}
                                     <Row>
-                                        <Col><Button theme="success" onClick={this.handleAdd}>Add</Button></Col>
+                                        <Col>
+                                            {
+                                                this.props.locked === true ?
+                                                    (<Button size="sm" disabled theme="success" onClick={this.handleAdd}>Add</Button>)
+                                                    : (<Button size="sm" theme="success" onClick={this.handleAdd}>Add</Button>)
+                                            }
+                                        </Col>
                                         <Col><NavButtons /></Col>
                                     </Row>
                                 </ListGroupItem>
@@ -86,4 +108,11 @@ class DateForm extends React.Component {
     }
 }
 
-export default connect()(DateForm);
+const mapStateToProps = (state) => {
+    return ({
+        effectiveDate: state.report.effectiveDate,
+        createDate: state.report.createDate
+    })
+}
+
+export default connect(mapStateToProps)(DateForm);
