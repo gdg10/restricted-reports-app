@@ -17,7 +17,7 @@ class ProgressButtons extends Component {
         return ({
             client: rs.client,
 		
-            subject: rs.subject.address + " " + rs.subject.address2 + ", " + rs.subject.city + ", " + rs.subject.state + ", " + rs.subject.state,
+            subject: rs.subject.address + " " + rs.subject.address2 + ", " + rs.subject.city + ", " + rs.subject.state + ", " + rs.subject.zip,
             inspect: "none",
             propType: "Single Family Residential",
     
@@ -37,28 +37,28 @@ class ProgressButtons extends Component {
             marketConditions : rs.market,
             additionalTransfers : 'n.a.',
     
-            comp1: rs.comparables[0].address,
+            comp1: rs.comparables[0].address + " " + rs.comparables[0].address2 + ", " + rs.comparables[0].city + ", " + rs.comparables[0].state + ", " + rs.comparables[0].zip,
             comp1_GLA: 'n.a.',
             comp1_LastPrice: 'n.a.',
             comp1_LastDate: 'n.a.',
             comp1_MLS: 'n.a.',
             comp1_BedBath : 'n.a.',
     
-            comp2: rs.comparables[1].address,
+            comp2: rs.comparables[1].address + " " + rs.comparables[1].address2 + ", " + rs.comparables[1].city + ", " + rs.comparables[1].state + ", " + rs.comparables[1].zip,
             comp2_GLA: 'n.a.',
             comp2_LastPrice: 'n.a.',
             comp2_LastDate: 'n.a.',
             comp2_MLS: 'n.a.',
             comp2_BedBath : 'n.a.',
     
-            comp3: rs.comparables[2].address,
+            comp3: rs.comparables[2].address + " " + rs.comparables[2].address2 + ", " + rs.comparables[2].city + ", " + rs.comparables[2].state + ", " + rs.comparables[2].zip,
             comp3_GLA: 'n.a.',
             comp3_LastPrice: 'n.a.',
             comp3_LastDate: 'n.a.',
             comp3_MLS: 'n.a.',
             comp3_BedBath : 'n.a.',
     
-            comp4: rs.comparables[3].address,
+            comp4: rs.comparables[3].address + " " + rs.comparables[3].address2 + ", " + rs.comparables[3].city + ", " + rs.comparables[3].state + ", " + rs.comparables[3].zip,
             comp4_GLA: 'n.a.',
             comp4_LastPrice: 'n.a.',
             comp4_LastDate: 'n.a.',
@@ -75,7 +75,7 @@ class ProgressButtons extends Component {
     
             price: "$" + rs.minVal + "- $" + rs.maxVal,
             scopeCmmnt: rs.scope + " " + rs.conditions,
-            dataSource: rs.source
+            source: rs.source
         });
     }
 
