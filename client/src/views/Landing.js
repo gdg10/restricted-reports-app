@@ -79,10 +79,10 @@ class Landing extends React.Component {
         <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
           <Row>
             <Col className="text-center">
-              <Card large className="px-3">
+              <Card className="px-3">
                 
                 <CardHeader className="border-bottom">
-                  <h7 className="m-0">Welcome to</h7>
+                  <h6 className="m-0">Welcome to</h6>
                   <h5 className="m-0">Restricted Reports</h5>
                 </CardHeader>
 

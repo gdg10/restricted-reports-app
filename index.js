@@ -26,9 +26,12 @@ app.get('/api/passwords', (req, res) => {
 });
 
 // GET RESTRICTED REPORT PDF
-app.get('/api/getPdf', (req, res) => {
+app.get('/api/getPdf/:data', (req, res) => {
   console.log('Request for PDF')
-  var data = ''; 
+  // console.log(req.params.data.slice(1, req.params.data.length));
+  // var data = req.params.data.slice(1, req.params.data.length); 
+  console.log(req.params.data);
+  var data = req.params.data; 
   var ID = '52726';
   var url = "https://us1.pdfgeneratorapi.com/api/v3/templates/" + ID + "/output?format=pdf&output=url&data=" + data;
   
