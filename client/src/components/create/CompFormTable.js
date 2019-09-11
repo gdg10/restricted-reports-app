@@ -2,18 +2,18 @@ import React from "react";
 import { connect } from 'react-redux';
 import CompFormRow from './CompFormRow';
 import {
-    ListGroup,
-    ListGroupItem,
-    Row,
-    Col,
-    Form,
-    FormInput,
-    FormGroup,
-    FormCheckbox,
+    // ListGroup,
+    // ListGroupItem,
+    // Row,
+    // Col,
+    // Form,
+    // FormInput,
+    // FormGroup,
+    // FormCheckbox,
     Card,
     CardHeader,
-    FormSelect,
-    Button
+    // FormSelect,
+    // Button
 } from "shards-react";
 
 class CompFormTable extends React.Component {

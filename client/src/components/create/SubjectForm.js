@@ -69,9 +69,9 @@ class SubjectForm extends React.Component {
     }
 
     handleSubmit = (e) => {
+        e.preventDefault();     //block page refresh
 
-        e.preventDefault();
-
+        //prompt is incomplete if address1, city, state, and zip are not fill out
         let incomplete = (
             this.state.curAddress.length <= 0 ||
             this.state.curCity.length <= 0 ||
@@ -79,17 +79,35 @@ class SubjectForm extends React.Component {
             this.state.curZip.length <= 0);
 
         if (incomplete) {
-            // TODO: Error message 
+            // TODO: Error message - "Please complete form to submit"
         } else {
-            this.props.dispatch(incrementProgress());
-            this.props.dispatch(addSubject({
-                address: this.state.curAddress,
-                address2: this.state.curAddress2,
-                city: this.state.curCity,
-                state: this.state.curState,
-                zip: this.state.curZip,
-                mls: this.state.curMLS
-            }));
+            let res = true;
+
+            let srchStr = encodeURI(
+                "&address=" + this.state.curAddress
+                + "&city=" + this.state.curCity 
+                + "&state=" + this.state.curState
+                + "&zip=" + this.state.curZip); 
+
+            fetch('/api/lookup/' + srchStr)
+                .then(res => console.log(res.json()));
+                // .then(res => res.replace(/\\/g, ""))
+                // .then(res => JSON.parse(res))
+                // .then(res => this.props.dispatch(makeActiveReport(res.response)));
+
+            if(res !== true){
+                // TODO: Error message - "We couldn't find that property"
+            }else{
+                this.props.dispatch(incrementProgress());
+                this.props.dispatch(addSubject({
+                    address: this.state.curAddress,
+                    address2: this.state.curAddress2,
+                    city: this.state.curCity,
+                    state: this.state.curState,
+                    zip: this.state.curZip,
+                    mls: this.state.curMLS
+                }));
+            }
         }
     }
 

@@ -80,31 +80,38 @@ class CompForm extends React.Component {
         if (incomplete) {
 
         } else {
-            this.props.dispatch(addComp({
-                address: this.state.curAddress,
-                address2: this.state.curAddress2,
-                city: this.state.curCity,
-                state: this.state.curState,
-                zip: this.state.curZip,
-                mls: this.state.curMLS
-            }));
-
-            this.setState({
-                address: this.state.curAddress,
-                address2: this.state.curAddress2,
-                city: this.state.curCity,
-                state: this.state.curState,
-                zip: this.state.curZip,
-                mls: this.state.curMLS,
-                comparables: [{
+            let valid = true;
+            if(valid){
+                //Dispatch the new comp to the store
+                this.props.dispatch(addComp({
                     address: this.state.curAddress,
                     address2: this.state.curAddress2,
                     city: this.state.curCity,
                     state: this.state.curState,
                     zip: this.state.curZip,
                     mls: this.state.curMLS
-                }].concat(this.state.comparables)
-            });
+                    }));
+
+                //update the state of the component
+                this.setState({
+                    address: this.state.curAddress,
+                    address2: this.state.curAddress2,
+                    city: this.state.curCity,
+                    state: this.state.curState,
+                    zip: this.state.curZip,
+                    mls: this.state.curMLS,
+                    comparables: [{
+                        address: this.state.curAddress,
+                        address2: this.state.curAddress2,
+                        city: this.state.curCity,
+                        state: this.state.curState,
+                        zip: this.state.curZip,
+                        mls: this.state.curMLS
+                    }].concat(this.state.comparables)
+                });
+            }else{
+                //show user that comp search was not successful
+            }
         }
     }
 

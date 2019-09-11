@@ -27,7 +27,7 @@ app.get('/api/passwords', (req, res) => {
 
 // GET RESTRICTED REPORT PDF
 app.get('/api/getPdf/:data', (req, res) => {
-  console.log('Request for PDF')
+  console.log('Request for PDF');
   // console.log(req.params.data.slice(1, req.params.data.length));
   // var data = req.params.data.slice(1, req.params.data.length); 
   console.log(req.params.data);
@@ -57,8 +57,11 @@ app.get('/api/getPdf/:data', (req, res) => {
 
 
 // ESTATED PROPERTY LOOKUP
-app.get('/api/lookup', (req, res) => {
-  lookupWrapper.make_API_call("https://api.estated.com/property/v3?token=LjBmdE0uCvAiNppmi2nwE7tcbCM6EV&address=107+Canal+Crossing&city=Stewartsville&state=NJ&zip=08886")
+app.get('/api/lookup/:srchStr', (req, res) => {
+  var sStr = req.params.sStr; 
+  console.log('Request for property info');
+  console.log(req.params.sStr);
+  lookupWrapper.make_API_call("https://api.estated.com/property/v3?token=LjBmdE0uCvAiNppmi2nwE7tcbCM6EV" + sStr)
   .then(response => {
       res.json(response)
   })
