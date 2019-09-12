@@ -32,6 +32,20 @@ const initialState = {
 
     scope: '',
     scopeComplete: false,
+
+    // subjectHistory: 'n.a.',
+    // owner: 'n.a.',
+    // fuel: 'n.a.',
+    // parking: 'n.a.',
+    // heating: 'n.a.',
+    // airCond: 'n.a.',
+    // yearBuilt: 'n.a.',
+    // bedCount: 'n.a.',
+    // bathCount: 'n.a.',
+    // gla: 'n.a.',
+    // architecture: 'n.a.',
+    // legalDes: 'n.a.'
+
 }
 
 const report = (state = initialState, action) => {

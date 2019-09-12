@@ -252,6 +252,7 @@ class SubjectForm extends React.Component {
                                                     (<Button disabled size="sm" theme="success"><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></Button>)
                                             }
                                         </Col>
+                                        {/* {this.state.searching === true ? <Col>Searching...</Col>: ''} */}
                                         <Col>
                                             <NavButtons />
                                         </Col>
