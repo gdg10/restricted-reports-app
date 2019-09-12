@@ -28,7 +28,8 @@ class SubjectForm extends React.Component {
             curAddress2: '',
             curState: '',
             curZip: '',
-            curMLS: ''
+            curMLS: '',
+            searching: false
         }
     }
 
@@ -47,7 +48,7 @@ class SubjectForm extends React.Component {
     handleCurCity = (e) => {
         this.setState({
             curCity: e.target.value
-        })
+        });
     }
 
     handleCurState = (e) => {
@@ -65,14 +66,13 @@ class SubjectForm extends React.Component {
     handleCurMLS = (e) => {
         this.setState({
             curMLS: e.target.value
-        })
+        });
     }
 
     handleSubmit = (e) => {
         e.preventDefault();     //block page refresh
 
-        //prompt is incomplete if address1, city, state, and zip are not fill out
-        let incomplete = (
+        let incomplete = (      //prompt is incomplete if address1, city, state, and zip are not fill out
             this.state.curAddress.length <= 0 ||
             this.state.curCity.length <= 0 ||
             this.state.curState.length <= 0 ||
@@ -81,33 +81,43 @@ class SubjectForm extends React.Component {
         if (incomplete) {
             // TODO: Error message - "Please complete form to submit"
         } else {
-            let res = true;
-
-            let srchStr = encodeURI(
-                "&address=" + this.state.curAddress
-                + "&city=" + this.state.curCity 
-                + "&state=" + this.state.curState
-                + "&zip=" + this.state.curZip); 
-
-            fetch('/api/lookup/' + srchStr)
-                .then(res => console.log(res.json()));
-                // .then(res => res.replace(/\\/g, ""))
-                // .then(res => JSON.parse(res))
-                // .then(res => this.props.dispatch(makeActiveReport(res.response)));
-
-            if(res !== true){
-                // TODO: Error message - "We couldn't find that property"
-            }else{
-                this.props.dispatch(incrementProgress());
-                this.props.dispatch(addSubject({
-                    address: this.state.curAddress,
-                    address2: this.state.curAddress2,
-                    city: this.state.curCity,
-                    state: this.state.curState,
-                    zip: this.state.curZip,
-                    mls: this.state.curMLS
-                }));
-            }
+            this.setState({
+                searching: true
+            });
+            //console.log(encodeURI('/api/lookup/' + this.state.curAddress + '/' + this.state.curCity + '/' + this.state.curState + '/' + this.state.curZip));
+            fetch(encodeURI('/api/lookup/' +
+                this.state.curAddress + '/' +
+                this.state.curCity + '/' +
+                this.state.curState + '/' +
+                this.state.curZip)
+            ).then(res => res.json())
+                .then(res => {
+                    console.log(JSON.stringify(res));
+                    if (res.success === true) {
+                        this.setState({
+                            searching: false                        //remove searching spinner
+                        });
+                        this.props.dispatch(incrementProgress());   //increment report progress
+                        this.props.dispatch(addSubject({            //dispatch Subject info to store
+                            address: this.state.curAddress,
+                            address2: this.state.curAddress2,
+                            city: this.state.curCity,
+                            state: this.state.curState,
+                            zip: this.state.curZip,
+                            mls: this.state.curMLS
+                        }));
+                    } else {
+                        console.log("Error: seach unsuccessful");
+                        this.setState({
+                            searching: false
+                        });
+                    }
+                }).catch(res => {
+                    console.log("There was an error");
+                    this.setState({
+                        searching: false
+                    });
+                });
         }
     }
 
@@ -121,7 +131,7 @@ class SubjectForm extends React.Component {
                     <Col>
                         <Form>
                             <ListGroup flush>
-                            {/* <Col md="12"><h7 className=""><i>Add the name of the person, business or institution to which the completed report is to be delivered.</i></h7></Col> */}
+                                {/* <Col md="12"><h7 className=""><i>Add the name of the person, business or institution to which the completed report is to be delivered.</i></h7></Col> */}
                                 <ListGroupItem className="p-3">
                                     <Row form>
                                         {
@@ -224,16 +234,18 @@ class SubjectForm extends React.Component {
                                     <Row>
                                         <Col>
                                             {
-                                                this.props.locked === true ?
-                                                    (<Button size="sm" disabled theme="success" onClick={this.handleSubmit}>Add</Button>)
-                                                    : (<Button size="sm" theme="success" onClick={this.handleSubmit}>Add</Button>)
+                                                this.state.searching === false ? (
+                                                    this.props.locked === true ?
+                                                        (<Button size="sm" disabled theme="success" onClick={this.handleSubmit}>Add</Button>)
+                                                        : (<Button size="sm" theme="success" onClick={this.handleSubmit}>Add</Button>)
+                                                ) :
+                                                    (<Button disabled size="sm" theme="success"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></Button>)
                                             }
                                         </Col>
                                         <Col>
                                             <NavButtons />
                                         </Col>
                                     </Row>
-
                                 </ListGroupItem>
                             </ListGroup>
                         </Form>
