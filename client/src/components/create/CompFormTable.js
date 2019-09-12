@@ -20,7 +20,6 @@ class CompFormTable extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = {};
     }
 
     render() {
@@ -32,13 +31,16 @@ class CompFormTable extends React.Component {
             <table className="table mb-0">
                 <thead className="bg-light">
                     <tr>
-                        <th scope="col" className="border-0">#</th>
+                        {/* <th scope="col" className="border-0">#</th> */}
                         <th scope="col" className="border-0">Address</th>
                         <th scope="col" className="border-0">City</th>
-                        <th scope="col" className="border-0">State</th>
-                        <th scope="col" className="border-0">ZIP</th>
-                        <th scope="col" className="border-0">MLS Number</th>
-                        <th scope="col" className="border-0">Remove</th>
+                        {/* <th scope="col" className="border-0">State</th> */}
+                        {/* <th scope="col" className="border-0">ZIP</th> */}
+                        <th scope="col" className="border-0">Last Sold</th>
+                        <th scope="col" className="border-0">Price</th>
+                        <th scope="col" className="border-0">Bed/Bath</th>
+                        <th scope="col" className="border-0">GLA</th>
+                        <th scope="col" className="border-0"></th>
                     </tr>
                 </thead>
                 <tbody>

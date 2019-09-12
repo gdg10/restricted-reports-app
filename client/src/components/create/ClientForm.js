@@ -23,22 +23,8 @@ class ClientForm extends React.Component {
         super(props);
         this.state = {
             name: '',
-            passwords: ["sdf"]
         }
     }
-
-    // Fetch passwords after first mount
-    componentDidMount() {
-        this.getPasswords();
-    }
-
-    getPasswords = () => {
-        // Get the passwords and store them in state
-        fetch('/api/passwords')
-            .then(res => res.json())
-            .then(passwords => this.setState({ passwords: passwords }));
-    }
-
 
     handleAdd = (e) => {
         let isValid = false;

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { addComp } from "../../redux/actions/reportActions";
+import { incrementProgress } from "../../redux/actions/wizardActions";
 import NavButtons from "./NavButtons";
 import CompFormTable from "./CompFormTable";
 
@@ -15,7 +16,8 @@ import {
     Card,
     CardHeader,
     FormSelect,
-    Button
+    Button,
+    FormFeedback
 } from "shards-react";
 
 class CompForm extends React.Component {
@@ -29,7 +31,9 @@ class CompForm extends React.Component {
             curZip: '',
             curMLS: '',
             comparables: [],
-            compCount: 0
+            compCount: 0,
+            searching: false,
+            invalidSearch: false
         }
     }
 
@@ -80,38 +84,75 @@ class CompForm extends React.Component {
         if (incomplete) {
 
         } else {
-            let valid = true;
-            if(valid){
-                //Dispatch the new comp to the store
-                this.props.dispatch(addComp({
-                    address: this.state.curAddress,
-                    address2: this.state.curAddress2,
-                    city: this.state.curCity,
-                    state: this.state.curState,
-                    zip: this.state.curZip,
-                    mls: this.state.curMLS
-                    }));
+            this.setState({
+                searching: true
+            });
+            //console.log(encodeURI('/api/lookup/' + this.state.curAddress + '/' + this.state.curCity + '/' + this.state.curState + '/' + this.state.curZip));
+            fetch(encodeURI('/api/lookup/' +
+                this.state.curAddress + '/' +
+                this.state.curCity + '/' +
+                this.state.curState + '/' +
+                this.state.curZip)
+            ).then(res => res.json())
+                .then(res => {
+                    console.log(JSON.stringify(res));
+                    if (res.success === true) {
+                        this.setState({
+                            searching: false,                       //remove searching spinner
+                            invalidSearch: false
+                        });
+                        
+                        var propData = res.properties[0];
+                        console.log(propData);
+                        //Dispatch the new comp to the store
+                        this.props.dispatch(addComp({
+                            address: this.state.curAddress,
+                            address2: this.state.curAddress2,
+                            city: this.state.curCity,
+                            state: this.state.curState,
+                            zip: this.state.curZip,
+                            mls: this.state.curMLS,
+                            gla : propData.structures[0].finished_size + " sqft",
+                            lastSold :  propData.sales[0].date,
+                            price : "$" + propData.sales[0].price,
+                            bedBath : propData.structures[0].beds_count + ' / ' + propData.structures[0].baths_count
+                        }));
 
-                //update the state of the component
-                this.setState({
-                    address: this.state.curAddress,
-                    address2: this.state.curAddress2,
-                    city: this.state.curCity,
-                    state: this.state.curState,
-                    zip: this.state.curZip,
-                    mls: this.state.curMLS,
-                    comparables: [{
-                        address: this.state.curAddress,
-                        address2: this.state.curAddress2,
-                        city: this.state.curCity,
-                        state: this.state.curState,
-                        zip: this.state.curZip,
-                        mls: this.state.curMLS
-                    }].concat(this.state.comparables)
+                        if (this.state.comparables.length === 3) {
+                            this.props.dispatch(incrementProgress());
+                        }
+
+                        //update the state of the component
+                        this.setState({
+                            address: this.state.curAddress,
+                            address2: this.state.curAddress2,
+                            city: this.state.curCity,
+                            state: this.state.curState,
+                            zip: this.state.curZip,
+                            mls: this.state.curMLS,
+                            comparables: [{
+                                address: this.state.curAddress,
+                                address2: this.state.curAddress2,
+                                city: this.state.curCity,
+                                state: this.state.curState,
+                                zip: this.state.curZip,
+                                mls: this.state.curMLS
+                            }].concat(this.state.comparables)
+                        });
+                    } else {
+                        console.log("Error: seach unsuccessful");
+                        this.setState({
+                            invalidSearch: true,
+                            searching: false
+                        });
+                    }
+                }).catch(res => {
+                    console.log("There was an error");
+                    this.setState({
+                        invalidSearch: true,
+                        searching: false
+                    });
                 });
-            }else{
-                //show user that comp search was not successful
-            }
         }
     }
 
@@ -131,13 +172,18 @@ class CompForm extends React.Component {
                                             <Col md='6'>
                                                 <FormGroup className="">
                                                     <label htmlFor="feInputAddress">Address</label>
-                                                    {this.props.locked ? ( <FormInput disabled valid id="feInputAddress" required />):( <FormInput onChange={this.handleCurAddress} id="feInputAddress" required />)}
+                                                    {this.props.locked ? (<FormInput disabled valid id="feInputAddress" required />) : (                                                    
+                                                        this.state.invalidSearch === true ?
+                                                            (<React.Fragment><FormInput invalid onChange={this.handleCurAddress} id="feInputAddress" required />
+                                                                <FormFeedback invalid>Could not find the property specified. Please try again.</FormFeedback></React.Fragment>)
+                                                            :(<FormInput onChange={this.handleCurAddress} id="feInputAddress" required />)
+                                                    )}
                                                 </FormGroup>
                                             </Col>
                                             <Col md='6'>
                                                 <FormGroup className="">
                                                     <label htmlFor="feInputAddress2">Address Line 2</label>
-                                                    {this.props.locked ? (<FormInput disabled valid id="feInputAddress2" />) : (<FormInput onChange={this.handleCurAddress2} id="feInputAddress2" />) }
+                                                    {this.props.locked ? (<FormInput disabled valid id="feInputAddress2" />) : (<FormInput onChange={this.handleCurAddress2} id="feInputAddress2" />)}
                                                 </FormGroup>
                                             </Col>
                                         </Row>
@@ -149,21 +195,21 @@ class CompForm extends React.Component {
                                             </Col>
                                             <Col md="2" className="form-group">
                                                 <label htmlFor="feInputState">State</label>
-                                                {this.props.locked ? (                                                
-                                                <FormSelect disabled valid id="feInputState" required>
-                                                    <option>Select...</option>
-                                                    <option>PA</option>
-                                                    <option>NJ</option>
-                                                </FormSelect>) : (                                                
-                                                <FormSelect id="feInputState" onChange={this.handleCurState} required>
-                                                    <option>Select...</option>
-                                                    <option>PA</option>
-                                                    <option>NJ</option>
-                                                </FormSelect>)}
+                                                {this.props.locked ? (
+                                                    <FormSelect disabled valid id="feInputState" required>
+                                                        <option>Select...</option>
+                                                        <option>PA</option>
+                                                        <option>NJ</option>
+                                                    </FormSelect>) : (
+                                                        <FormSelect id="feInputState" onChange={this.handleCurState} required>
+                                                            <option>Select...</option>
+                                                            <option>PA</option>
+                                                            <option>NJ</option>
+                                                        </FormSelect>)}
                                             </Col>
                                             <Col md="2" className="form-group">
                                                 <label htmlFor="feInputZip">ZIP</label>
-                                                {this.props.locked ? (<FormInput valid disabled id="feInputZip" required />):(<FormInput onChange={this.handleCurZip} id="feInputZip" required />)}
+                                                {this.props.locked ? (<FormInput valid disabled id="feInputZip" required />) : (<FormInput onChange={this.handleCurZip} id="feInputZip" required />)}
                                             </Col>
                                             <Col md="2" className="form-group">
                                                 <label htmlFor="feMLSNumber">MLS#</label>
@@ -172,7 +218,9 @@ class CompForm extends React.Component {
                                         </Row>
                                         <Row>
                                             <Col>
-                                            {this.props.locked ? ( <Button theme="success" disabled type="submit">Add Comparable</Button>):( <Button theme="success" onClick={this.handleSubmit} type="submit">Add Comparable</Button>)}
+                                                {
+                                                    (this.state.searching === false ? (this.props.locked === true ?(<Button size="sm" disabled theme="success" onClick={this.handleSubmit}>Add</Button>): (<Button size="sm" theme="success" onClick={this.handleSubmit}>Add</Button>)) : (<Button disabled size="sm" theme="success"><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></Button>))
+                                                }
                                             </Col>
                                             <Col><NavButtons /></Col>
                                         </Row>

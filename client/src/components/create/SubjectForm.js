@@ -29,7 +29,8 @@ class SubjectForm extends React.Component {
             curState: '',
             curZip: '',
             curMLS: '',
-            searching: false
+            searching: false,
+            invalidSearch : false
         }
     }
 
@@ -95,7 +96,8 @@ class SubjectForm extends React.Component {
                     console.log(JSON.stringify(res));
                     if (res.success === true) {
                         this.setState({
-                            searching: false                        //remove searching spinner
+                            searching: false,                       //remove searching spinner
+                            invalidSearch : false
                         });
                         this.props.dispatch(incrementProgress());   //increment report progress
                         this.props.dispatch(addSubject({            //dispatch Subject info to store
@@ -109,12 +111,14 @@ class SubjectForm extends React.Component {
                     } else {
                         console.log("Error: seach unsuccessful");
                         this.setState({
+                            invalidSearch: true,
                             searching: false
                         });
                     }
                 }).catch(res => {
                     console.log("There was an error");
                     this.setState({
+                        invalidSearch: true,
                         searching: false
                     });
                 });
@@ -123,6 +127,7 @@ class SubjectForm extends React.Component {
 
     render() {
         return (
+        <React.Fragment>
             <Card small className="mb-4">
                 <CardHeader className="border-bottom">
                     <h6 className="m-0">Add Subject</h6>
@@ -187,7 +192,12 @@ class SubjectForm extends React.Component {
                                                         {/* // Address */}
                                                         <FormGroup>
                                                             <label htmlFor="feInputAddress">Subject Address</label>
-                                                            <FormInput onChange={this.handleCurAddress} id="feInputAddress" required />
+                                                                {this.state.invalidSearch === true ?
+                                                                    (<React.Fragment><FormInput invalid onChange={this.handleCurAddress} id="feInputAddress" required />
+                                                                        <FormFeedback invalid>Could not find the property specified. Please try again.</FormFeedback></React.Fragment>)
+                                                                    :
+                                                                    (<FormInput onChange={this.handleCurAddress} id="feInputAddress" required />)
+                                                                }
                                                         </FormGroup>
                                                     </Col>
 
@@ -239,7 +249,7 @@ class SubjectForm extends React.Component {
                                                         (<Button size="sm" disabled theme="success" onClick={this.handleSubmit}>Add</Button>)
                                                         : (<Button size="sm" theme="success" onClick={this.handleSubmit}>Add</Button>)
                                                 ) :
-                                                    (<Button disabled size="sm" theme="success"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></Button>)
+                                                    (<Button disabled size="sm" theme="success"><span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span></Button>)
                                             }
                                         </Col>
                                         <Col>
@@ -251,7 +261,7 @@ class SubjectForm extends React.Component {
                         </Form>
                     </Col>
                 </Row>
-            </Card>
+            </Card></React.Fragment>
         );
     }
 }

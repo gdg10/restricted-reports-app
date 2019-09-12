@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
+  Alert,
   Container,
   Row,
   Col,
-  //Alert
+  Button,
 } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
 import SideBarProgress from "../components/create/SideBarProgress";
@@ -23,11 +24,11 @@ import DateForm from "../components/create/DateForm";
 
 const ReportWizard = (props) => (
   <div>
-    <Container fluid className="px-0">
-      {/* <Alert className="mb-0">
-        <i className="fa fa-info mx-2"></i> How you doin'? I'm just a friendly, good-looking notification message and I come in all the colors you can see below. Pretty cool, huh?
-      </Alert> */}
-    </Container>
+    {/* <Container fluid className="px-0">
+      <Alert className="mb-0">
+        <i className="fa fa-info mx-2"></i> How you doin'? Pretty cool, huh? <a href="#">Dismiss</a>
+    </Alert>
+    </Container> */}
     <Container fluid className="main-content-container px-4">
       <Row noGutters className="page-header py-4">
         <PageTitle sm="4" title="Create" subtitle="Report Wizard" className="text-sm-left" />
