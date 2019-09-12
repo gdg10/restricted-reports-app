@@ -46,21 +46,17 @@ app.get('/api/getPdf/:data', (req, res) => {
 
 })
 
-// var key = 'df95b809583e1377de772a6a0bd215f6d1c709fa7bb869fa716e674f8d3fdcfc';
-// var secret = '9dea60808354915c1f3ec63de0f5e6278774d16b3ae20df4a542f945922628ab';
-// var workspace = 'garrett@blackshirtcode.com';
-
-// var ID = '52726';
-// var url = "https://us1.pdfgeneratorapi.com/api/v3/templates/" + ID + "/output?format=pdf&output=url&data=" + data;
-
-// return fetch(url, { "method": "post", "headers": { 'X-Auth-Key': key, 'X-Auth-Secret': secret, 'X-Auth-Workspace': workspace, 'Accept': 'application/json', 'Content-Type': 'application/json; charset=utf-8' } }).then(response => response.text());
-
-
 // ESTATED PROPERTY LOOKUP
-app.get('/api/lookup/:srchStr', (req, res) => {
-  var sStr = req.params.sStr; 
+app.get('/api/lookup/:address/:city/:state/:zip', (req, res) => {
   console.log('Request for property info');
-  console.log(req.params.sStr);
+  
+  let sStr = ("&address=" + req.params.address
+    + "&city=" + req.params.city 
+    + "&state=" + req.params.state
+    + "&zip=" + req.params.zip); 
+
+  console.log("making call to endpoint: " + "https://api.estated.com/property/v3?token=LjBmdE0uCvAiNppmi2nwE7tcbCM6EV" + sStr)
+  
   lookupWrapper.make_API_call("https://api.estated.com/property/v3?token=LjBmdE0uCvAiNppmi2nwE7tcbCM6EV" + sStr)
   .then(response => {
       res.json(response)
