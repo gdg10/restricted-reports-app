@@ -76,8 +76,6 @@ class SidebarProgress extends React.Component {
         promptIndex : 9
       }
     ];
-  
-    // var progressList = promptName.map( (n, index) => <ProgressItem promptName={n} iconName="visibility" key={index} />);
     
     return (
       <Card small className="mb-3">

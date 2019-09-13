@@ -33,7 +33,7 @@ class BlogPosts extends React.Component {
           <PageTitle sm="4" title="Reports" subtitle="Drafts & Published" className="text-sm-left" />
         </Row>
         <Row md='12'>
-          <Col md='10'>
+          <Col md='12'>
             <Viewer />
           </Col>
         </Row>

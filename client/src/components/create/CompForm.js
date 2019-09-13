@@ -115,7 +115,7 @@ class CompForm extends React.Component {
                             gla : propData.structures[0].finished_size + " sqft",
                             lastSold :  propData.sales[0].date,
                             price : "$" + propData.sales[0].price,
-                            bedBath : propData.structures[0].beds_count + ' / ' + propData.structures[0].baths_count
+                            bedBath : propData.structures[0].beds_count + ' - ' + propData.structures[0].baths_count
                         }));
 
                         if (this.state.comparables.length === 3) {

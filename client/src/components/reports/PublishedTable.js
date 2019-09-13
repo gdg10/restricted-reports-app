@@ -24,30 +24,28 @@ class PublishedTable extends React.Component {
     }
 
     render() {
-        if (this.props.allReports.length > 0 && this.props.activeReport === null) {
+        // if (this.props.allReports.length > 0 && this.props.activeReport === null) {
+        if (true) {   
             return (
                 <Card small className="mb-4">
                     <CardHeader className="border-bottom">
-                        <h6 className="m-0">Published</h6>
+                        <h6 className="m-0">Reports</h6>
                         {/* <h6 className="m-0">Published({this.props.comps.length})</h6> */}
                     </CardHeader>
                     <table className="table mb-0">
                         <thead className="bg-light">
                             <tr>
                                 <th scope="col" className="border-0">#</th>
-                                <th scope="col" className="border-0"> Address</th>
-                                <th scope="col" className="border-0"> Address 2</th>
-                                <th scope="col" className="border-0">City</th>
-                                <th scope="col" className="border-0">State</th>
-                                <th scope="col" className="border-0">ZIP</th>
-                                <th scope="col" className="border-0">MLS Number</th>
-                                <th scope="col" className="border-0">Remove</th>
+                                <th scope="col" className="border-0">Address</th>
+                                <th scope="col" className="border-0">Status</th>
+                                <th scope="col" className="border-0">Completion</th>
                                 <th scope="col" className="border-0">View</th>
+                                <th scope="col" className="border-0">Delete</th>
                             </tr>
                         </thead>
-                        {/* <tbody>
-                            { this.props.comps.map( (n, index) => <PublishedTableRow comp={n} number={index} key={index}/>) }
-                        </tbody> */}
+                        <tbody>
+                            { this.props.allReports.map( (n, index) => <PublishedTableRow report={n} number={index} key={index}/>) }
+                        </tbody>
                     </table>
                 </Card>);
         } else if (this.props.allReports === {}) {
@@ -60,7 +58,7 @@ class PublishedTable extends React.Component {
 
 const mapStateToProps = (state) => {
     return ({
-        allReports: state.allReports,
+        allReports: state.allReports.reports,
         activeReport: state.activeReport.activeReport
     });
 }

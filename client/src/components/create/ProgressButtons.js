@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux"
-import { makeActiveReport } from "../../redux/actions/activeReportActions";
+import { addReport } from "../../redux/actions/allReportsActions";
 
 import {
     ListGroupItem,
@@ -21,21 +21,21 @@ class ProgressButtons extends Component {
             inspect: "none",
             propType: "Single Family Residential",
     
-            subjectHistory : 'n.a.',
-            owner : 'n.a.',
-            fuel : 'n.a.',
-            parking: 'n.a.',
-            heating : 'n.a.',
-            airCond : 'n.a.',
-            yearBuilt : 'n.a.',
-            bedCount : 'n.a.',
-            bathCount : 'n.a.',
-            gla : 'n.a.',
-            architecture : 'n.a.',
-            legalDes: 'n.a.',
-            mlsNumber : 'n.a.', 
+            subjectHistory : rs.subject.subjectHistory,
+            owner : rs.subject.owner,
+            fuel : rs.subject.fuel,
+            parking: rs.subject.parking,
+            heating :rs.subject.heating,
+            airCond : rs.subject.airCond,
+            yearBuilt : rs.subject.yearBuilt,
+            bedCount : rs.subject.bedCount,
+            bathCount : rs.subject.bathCount,
+            gla : rs.subject.gla,
+            architecture : rs.subject.architecture,
+            legalDes: rs.subject.legalDes,
+            mlsNumber : rs.subject.mlsNumber, 
             marketConditions : rs.market,
-            additionalTransfers : 'n.a.',
+            additionalTransfers : rs.subject.additionalTransfers,
     
             comp1: rs.comparables[0].address + " " + rs.comparables[0].address2 + ", " + rs.comparables[0].city + ", " + rs.comparables[0].state + ", " + rs.comparables[0].zip,
             comp1_GLA: rs.comparables[0].gla,
@@ -82,11 +82,16 @@ class ProgressButtons extends Component {
     // CALL THE BACKEND AND REQUEST A PDF
     handlePublish = () => {
         var data = JSON.stringify(this.mapReportStateToReportData(this.props.reportState));
+        console.log(data);
         fetch('/api/getPDF/' + data)
             .then(res => res.json())
             .then(res => res.replace(/\\/g, ""))
             .then(res => JSON.parse(res))
-            .then(res => this.props.dispatch(makeActiveReport(res.response)))
+            .then(res => this.props.dispatch(addReport({
+                link: res.response,
+                address : this.props.reportState.subject.address + ', ' + this.props.reportState.subject.city + ', ' + this.props.reportState.subject.state + ', ' + this.props.reportState.subject.zip,
+                completion : "%100"
+            })))
     }
 
     //CALL THE BACKEND AND REQUEST PUSH TO DATA BASE
@@ -98,17 +103,17 @@ class ProgressButtons extends Component {
 
         // SHOULD BUTTONS BE DISABLED? a function of progress
         var saveDisabled = this.props.progress <= 0;
-        // var publishDisabled = false;
-        var publishDisabled = this.props.progress !== 100; //logic disabled for testing
+        var publishDisabled = false;
+        // var publishDisabled = this.props.progress !== 100; //logic disabled for testing
 
         return (
             <ListGroupItem className="d-flex px-3">
 
                 {/* SAVE BUTTON */}
-                {saveDisabled === true ?
+                {/* {saveDisabled === true ?
                     (<Button outline disabled theme="accent" size="sm"><i className="material-icons">save</i> Save Draft </Button>)
                     : (<Button outline theme="accent" size="sm"><i className="material-icons">save</i> Save Draft</Button>)
-                }
+                } */}
 
                 {/* PUBLISH BUTTON */}
                 {publishDisabled === true ?

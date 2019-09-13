@@ -100,13 +100,31 @@ class SubjectForm extends React.Component {
                             invalidSearch : false
                         });
                         this.props.dispatch(incrementProgress());   //increment report progress
+                        var propData = res.properties[0];
+                        console.log(propData);
                         this.props.dispatch(addSubject({            //dispatch Subject info to store
                             address: this.state.curAddress,
                             address2: this.state.curAddress2,
                             city: this.state.curCity,
                             state: this.state.curState,
                             zip: this.state.curZip,
-                            mls: this.state.curMLS
+                            mls: this.state.curMLS,
+                            gla : propData.structures[0].finished_size + " sqft",
+                            lastSold :  propData.sales[0].date,
+                            price : "$" + propData.sales[0].price,
+                            subjectHistory : 'n.a.',
+                            owner : 'n.a.',
+                            fuel : propData.structures[0].fuel_type,
+                            parking: propData.structures[0].parking_type,
+                            heating : propData.structures[0].heating_type,
+                            airCond : propData.structures[0].air_conditioning_type,
+                            yearBuilt : propData.structures[0].year_built,
+                            bedCount : propData.structures[0].beds_count,
+                            bathCount : propData.structures[0].baths_count,
+                            architecture : propData.structures[0].architecture_type,
+                            legalDes: 'n.a.',
+                            mlsNumber : 'n.a.', 
+                            additionalTransfers : 'n.a.',
                         }));
                     } else {
                         console.log("Error: seach unsuccessful");

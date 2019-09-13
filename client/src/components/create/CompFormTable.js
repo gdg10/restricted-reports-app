@@ -38,7 +38,7 @@ class CompFormTable extends React.Component {
                         {/* <th scope="col" className="border-0">ZIP</th> */}
                         <th scope="col" className="border-0">Last Sold</th>
                         <th scope="col" className="border-0">Price</th>
-                        <th scope="col" className="border-0">Bed/Bath</th>
+                        <th scope="col" className="border-0">Bed - Bath</th>
                         <th scope="col" className="border-0">GLA</th>
                         <th scope="col" className="border-0"></th>
                     </tr>
