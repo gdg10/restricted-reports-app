@@ -91,7 +91,7 @@ class ProgressButtons extends Component {
                 link: res.response,
                 address : this.props.reportState.subject.address + ', ' + this.props.reportState.subject.city + ', ' + this.props.reportState.subject.state + ', ' + this.props.reportState.subject.zip,
                 status : "Published",
-                completion : this.props.progress
+                completion : this.props.progress + '%'
             })))
     }
 
@@ -104,8 +104,8 @@ class ProgressButtons extends Component {
 
         // SHOULD BUTTONS BE DISABLED? a function of progress
         var saveDisabled = this.props.progress <= 0;
-        var publishDisabled = false;
-        // var publishDisabled = this.props.progress !== 100; //logic disabled for testing
+        //var publishDisabled = false;
+        var publishDisabled = this.props.progress !== 100; //logic disabled for testing
 
         return (
             <ListGroupItem className="d-flex px-3">
