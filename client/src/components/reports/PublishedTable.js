@@ -24,8 +24,7 @@ class PublishedTable extends React.Component {
     }
 
     render() {
-        // if (this.props.allReports.length > 0 && this.props.activeReport === null) {
-        if (true) {   
+        if (this.props.counter > 0) {
             return (
                 <Card small className="mb-4">
                     <CardHeader className="border-bottom">
@@ -48,7 +47,7 @@ class PublishedTable extends React.Component {
                         </tbody>
                     </table>
                 </Card>);
-        } else if (this.props.allReports === {}) {
+        } else if (this.props.counter === 0) {
             return "No reports to show right now. Publish a report in the 'Create' tab to view it here.";
         } else {
             return '';
@@ -59,6 +58,7 @@ class PublishedTable extends React.Component {
 const mapStateToProps = (state) => {
     return ({
         allReports: state.allReports.reports,
+        counter: state.allReports.reports.length,
         activeReport: state.activeReport.activeReport
     });
 }

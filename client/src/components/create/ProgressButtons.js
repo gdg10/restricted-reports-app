@@ -90,7 +90,8 @@ class ProgressButtons extends Component {
             .then(res => this.props.dispatch(addReport({
                 link: res.response,
                 address : this.props.reportState.subject.address + ', ' + this.props.reportState.subject.city + ', ' + this.props.reportState.subject.state + ', ' + this.props.reportState.subject.zip,
-                completion : "%100"
+                status : "Published",
+                completion : this.props.progress
             })))
     }
 

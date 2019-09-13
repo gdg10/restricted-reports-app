@@ -15,7 +15,7 @@ const PublishedTableRow = (props) => {
 
             {/* BUTTON THAT WILL REMOVE ROW FROM TABLE ONCLICK */}
             <td><Button outline onClick={() => {
-                props.dispatch(makeActiveReport(props.link))
+                props.dispatch(makeActiveReport(props.report.link))
             }} theme="success"><i className="material-icons">pageview</i></Button></td>
 
             {/* BUTTON THAT VIEW REPORT ONCLICK */}

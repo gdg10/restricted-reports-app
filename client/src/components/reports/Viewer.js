@@ -4,42 +4,35 @@ import {
     Card,
     CardHeader,
     CardBody
-  } from "shards-react";
+} from "shards-react";
 
-class Viewer extends React.Component {
-    
-    constructor(props){
-        super(props);
-    }
-
-    render(){
-        var active = !(this.props.activeReport === null); 
-        if(active){
-            return (        
+const Viewer = (props) => {
+    var active = !(this.props.activeReport === null);
+    if (active) {
+        return (
             <React.Fragment>
                 <Card className="mb-3">
                     <CardHeader className="border-bottom">
                         <h6 className="m-0">Report Viewer</h6>
                     </CardHeader>
-    
+
                     <CardBody className="p-4  embed-responsive-16by9">
-                        <iframe style={{height: "50vh", width:'100%'}} 
-                        title='activeReport' className="embed-responsive-item" 
-                        src={this.props.activeReport} 
-                        allowFullScreen>
+                        <iframe style={{ height: "50vh", width: '100%' }}
+                            title='activeReport' className="embed-responsive-item"
+                            src={this.props.activeReport}
+                            allowFullScreen>
                         </iframe>
                     </CardBody>
                 </Card>
             </React.Fragment>)
-        }else{
-            return("");     // SHOW NOTHING IF NO REPORT IS ACTIVE
-        }
+    } else {
+        return ("");     // SHOW NOTHING IF NO REPORT IS ACTIVE
     }
 }
 
 const mapStateToProps = (state) => {
     return ({
-        activeReport : state.activeReport.activeReport
+        activeReport: state.activeReport.activeReport
     });
 }
 

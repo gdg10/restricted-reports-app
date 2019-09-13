@@ -3,6 +3,7 @@ export const addReport = (reportUrl) => ({
     payload : reportUrl
 });
 
-export const removeReport = () => ({
-    type: "REMOVE_REPORT"
+export const removeReport = (index) => ({
+    type: "REMOVE_REPORT",
+    payload : index
 });
