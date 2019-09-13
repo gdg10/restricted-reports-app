@@ -38,8 +38,8 @@ class PublishedTable extends React.Component {
                                 <th scope="col" className="border-0">Address</th>
                                 <th scope="col" className="border-0">Status</th>
                                 <th scope="col" className="border-0">Completion</th>
-                                <th scope="col" className="border-0">View</th>
-                                <th scope="col" className="border-0">Delete</th>
+                                <th scope="col" className="border-0">    </th>
+                                <th scope="col" className="border-0">    </th>
                             </tr>
                         </thead>
                         <tbody>

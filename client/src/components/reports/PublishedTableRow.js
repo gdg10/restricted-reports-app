@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Button } from "shards-react";
 import { removeReport } from "../../redux/actions/allReportsActions";
-import { makeActiveReport } from "../../redux/actions/activeReportActions";
+import { makeActiveReport, clearActiveReport } from "../../redux/actions/activeReportActions";
 
 const PublishedTableRow = (props) => {
     return (
@@ -14,14 +14,15 @@ const PublishedTableRow = (props) => {
             <td style={{verticalAlign: 'middle'}}>{props.report.completion}</td>
 
             {/* BUTTON THAT WILL REMOVE ROW FROM TABLE ONCLICK */}
-            <td><Button outline onClick={() => {
+            <td><Button className="p-2" outline onClick={() => {
                 props.dispatch(makeActiveReport(props.report.link))
-            }} theme="success"><i className="material-icons">pageview</i></Button></td>
+            }} theme="success">View <i className="material-icons">pageview</i></Button></td>
 
             {/* BUTTON THAT VIEW REPORT ONCLICK */}
-            <td><Button outline onClick={() => {
-                props.dispatch(removeReport(props.number))
-            }} theme="danger"><i className="material-icons">delete</i></Button></td>
+            <td><Button className="p-2" outline onClick={() => {
+                props.dispatch(removeReport(props.number)); 
+                props.dispatch(clearActiveReport())
+            }} theme="danger">Delete <i className="material-icons">delete</i></Button></td>
         </tr>
     )
 }
