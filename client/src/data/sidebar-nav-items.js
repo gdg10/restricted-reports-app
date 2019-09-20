@@ -9,7 +9,7 @@ export default function() {
     {
       title: "Create",
       htmlBefore: '<i class="material-icons">note_add</i>',
-      to: "/report-wizard"
+      to: "/create"
     },
     {
       title: "Reports",

@@ -15,6 +15,7 @@ import BlogPosts from "./views/BlogPosts";
 import ReportWizard from "./views/ReportWizard";
 import Landing from "./views/Landing";
 import PropertyLookup from "./views/PropertyLookup";
+import Create from './views/Create'
 
 export default [
   {
@@ -40,9 +41,9 @@ export default [
     component: UserProfileLite
   },
   {
-    path: "/report-wizard",
+    path: "/create",
     layout: DefaultLayout,
-    component: ReportWizard
+    component: Create
   },
   {
     path: "/property-lookup",
