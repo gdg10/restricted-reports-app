@@ -61,7 +61,7 @@ class ScopeForm extends React.Component {
                                             <div className="form-group">
                                             {
                                                 this.props.locked === true ?
-                                                    (<textarea disabled valid value={this.props.scope} className="form-control" rows="5" id="comment"></textarea>)
+                                                    (<textarea disabled value={this.props.scope} className="form-control" rows="5" id="comment"></textarea>)
                                                     : (<textarea onChange={this.handleChange} className="form-control" rows="5" id="comment"></textarea>)
                                             }
                                             </div>

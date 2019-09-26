@@ -70,7 +70,7 @@ class DateForm extends React.Component {
                                     <Row form>
                                         <Col md="6" className="form-group">
                                             <div className="form-group">
-                                                <label for="crt">Create Date</label>
+                                                <label htmlFor="crt">Create Date</label>
                                                 {this.props.locked ?
                                                     (<FormInput valid disabled value={this.props.createDate} type="date" className="form-control" id="crt"></FormInput>)
                                                     : (<FormInput onChange={this.handleCreateChange} type="date" className="form-control" id="crt"></FormInput>)}
@@ -79,7 +79,7 @@ class DateForm extends React.Component {
                                         </Col>
                                         <Col md="6" className="form-group">
                                             <div className="form-group">
-                                                <label for="usr">Effective Date</label>
+                                                <label htmlFor="usr">Effective Date</label>
                                                 {this.props.locked ?
                                                     (<FormInput valid disabled value={this.props.effectiveDate} type="date" className="form-control" id="usr"></FormInput>)
                                                     : (<FormInput onChange={this.handleEffectiveChange} type="date" className="form-control" id="usr"></FormInput>)}
