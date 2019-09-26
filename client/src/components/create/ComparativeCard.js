@@ -1,23 +1,11 @@
 import React from "react";
-import NavButtons from "./NavButtons";
 import { connect } from "react-redux";
-import { addMarket } from "../../redux/actions/reportActions";
-import { incrementProgress } from "../../redux/actions/wizardActions";
+import { setView } from "../../redux/actions/CreateViewActions";
 import {
-    ListGroup,
-    ListGroupItem,
-    Row,
-    Col,
-    Form,
     Card,
     CardHeader,
     CardBody,
     CardFooter,
-    FormInput,
-    FormGroup,
-    FormCheckbox,
-    FormSelect,
-    FormFeedback,
     Button
 } from "shards-react";
 
@@ -44,7 +32,7 @@ class ComparativeCard extends React.Component {
                     <p>Compare a subject property to similar sales. Determine a price range.</p>
                 </CardBody>
                 <CardFooter>
-                    <Button style={this.buttonStyle}>New</Button>
+                    <Button onClick={() => {this.props.dispatch(setView(2))}} style={this.buttonStyle}>New</Button>
                 </CardFooter>
             </Card>
         )
