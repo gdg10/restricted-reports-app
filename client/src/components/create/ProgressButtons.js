@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux"
 import { addReport } from "../../redux/actions/allReportsActions";
+import { setView } from "../../redux/actions/CreateViewActions";
 
 import {
     ListGroupItem,
@@ -73,7 +74,7 @@ class ProgressButtons extends Component {
             exposureTimeMin: rs.exposureTimeMin,
             exposureTimeMax: rs.exposureTimeMax,
     
-            price: "$" + rs.minVal + "- $" + rs.maxVal,
+            price: "$" + rs.minVal + " - $" + rs.maxVal,
             scopeCmmnt: rs.scope + " " + rs.conditions,
             source: rs.sources
         });
@@ -87,12 +88,20 @@ class ProgressButtons extends Component {
             .then(res => res.json())
             .then(res => res.replace(/\\/g, ""))
             .then(res => JSON.parse(res))
-            .then(res => this.props.dispatch(addReport({
-                link: res.response,
-                address : this.props.reportState.subject.address + ', ' + this.props.reportState.subject.city + ', ' + this.props.reportState.subject.state + ', ' + this.props.reportState.subject.zip,
-                status : "Published",
-                completion : this.props.progress + '%'
-            })))
+            .then(res => {
+                //add report to reports page
+                this.props.dispatch(addReport({
+                    link: res.response,
+                    address : this.props.reportState.subject.address + ', ' + this.props.reportState.subject.city + ', ' + this.props.reportState.subject.state + ', ' + this.props.reportState.subject.zip,
+                    status : "Published",
+                    completion : this.props.progress + '%'
+                }));
+               
+                //reset create view to report selection
+                this.props.dispatch(
+                    setView(1)
+                )
+            })
     }
 
     //CALL THE BACKEND AND REQUEST PUSH TO DATA BASE
@@ -104,8 +113,8 @@ class ProgressButtons extends Component {
 
         // SHOULD BUTTONS BE DISABLED? a function of progress
         var saveDisabled = this.props.progress <= 0;
-        var publishDisabled = false;
-        // var publishDisabled = this.props.progress !== 100; //logic disabled for testing
+        // var publishDisabled = false;
+        var publishDisabled = this.props.progress !== 50; //logic disabled for testing
 
         return (
             <ListGroupItem className="d-flex px-3">
