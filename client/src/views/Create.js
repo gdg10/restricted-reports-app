@@ -8,13 +8,20 @@ import {
     Button,
 } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
-import ComparativeCard from "../components/create/ComparativeCard";
-import AVMCard from "../components/create/AVMCard";
+import Selection from './Selection';
+import ReportWizard from './ReportWizard';
+var SELECTION = 1;
+var COMPARATIVE = 2;
+var AVM = 3;
+
+// this view toggles between report type selection, comparative report wizard, avm wizard
 
 class Create extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            curView: 1
+        };
     }
 
     render() {
@@ -23,10 +30,11 @@ class Create extends Component {
                 <Row noGutters className="page-header py-4">
                     <PageTitle sm="4" title="Create" subtitle="Report Wizard" className="text-sm-left" />
                 </Row>
-                <Row>
-                    <Col md='4'><ComparativeCard /></Col>
-                    {/* <Col md='4'><AVMCard /></Col> */}
-                </Row>
+
+                {this.state.curView === SELECTION ? <Selection /> : ''}
+                {this.state.curView === COMPARATIVE ? <ReportWizard /> : ''}
+                {this.state.curView === AVM ? '' : ''}
+
             </Container>
         );
     }

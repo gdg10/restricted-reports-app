@@ -1,13 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import {
-  Alert,
-  Container,
   Row,
-  Col,
-  Button,
+  Col
 } from "shards-react";
-import PageTitle from "../components/common/PageTitle";
 import SideBarProgress from "../components/create/SideBarProgress";
 
 // PROMPTS
@@ -29,10 +25,10 @@ const ReportWizard = (props) => (
         <i className="fa fa-info mx-2"></i> How you doin'? Pretty cool, huh? <a href="#">Dismiss</a>
     </Alert>
     </Container> */}
-    <Container fluid className="main-content-container px-4">
+    {/* <Container fluid className="main-content-container px-4">
       <Row noGutters className="page-header py-4">
         <PageTitle sm="4" title="Create" subtitle="Report Wizard" className="text-sm-left" />
-      </Row>
+      </Row> */}
       <Row>
         <Col lg="8" className="mb-4">
 
@@ -54,7 +50,7 @@ const ReportWizard = (props) => (
           <SideBarProgress />
         </Col>
       </Row>
-    </Container>
+    {/* </Container> */}
   </div>
 );
 
