@@ -103,7 +103,7 @@ class ValueForm extends React.Component {
                                             <div className="form-group">
                                                 <label htmlFor="comment">Reconciliation</label>
                                                 {this.props.locked ?
-                                                    (<textarea disabled valid value={this.props.rec} className="form-control" rows="5" id="comment"></textarea>)
+                                                    (<textarea disabled value={this.props.rec} className="form-control" rows="5" id="comment"></textarea>)
                                                     :(<textarea onChange={this.handleChangeRec} className="form-control" rows="5" id="comment"></textarea>)}
                                             </div>
                                         </Col>

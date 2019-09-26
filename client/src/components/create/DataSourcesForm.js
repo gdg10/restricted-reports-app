@@ -77,7 +77,7 @@ class DataSourcesForm extends React.Component {
                                                 <FormCheckbox valid disabled value="Other" >Other</FormCheckbox>
                                             </fieldset>
                                         </Col>
-                                        <Row><Col className="m-2"><h9 theme="success">Valid selection: {this.props.sources}</h9></Col></Row>
+                                        <Row><Col className="m-2"><p>Valid selection: {this.props.sources}</p></Col></Row>
                                     </Row>)
                                     : (<Row form>
                                         <Col md="4" className="form-group">
