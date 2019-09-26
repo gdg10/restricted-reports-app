@@ -3,18 +3,8 @@ import { connect } from "react-redux";
 import PublishedTableRow from "./PublishedTableRow";
 
 import {
-    ListGroup,
-    ListGroupItem,
-    Row,
-    Col,
-    Form,
-    FormInput,
-    FormGroup,
-    FormCheckbox,
     Card,
-    CardHeader,
-    FormSelect,
-    Button
+    CardHeader
 } from "shards-react";
 
 class PublishedTable extends React.Component {

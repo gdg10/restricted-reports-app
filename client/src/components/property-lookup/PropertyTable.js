@@ -5,13 +5,7 @@ import {
     ListGroup,
     ListGroupItem,
     Row,
-    Col,
-    Form,
-    FormInput,
-    FormGroup,
-    FormCheckbox,
-    FormSelect,
-    Button
+    Col
 } from "shards-react";
 
 class PropertyTable extends React.Component {

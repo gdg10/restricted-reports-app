@@ -1,18 +1,5 @@
 const initialState = {
-    reports : [
-        {
-            address : '3409 Parkview Ave, Pittsburgh PA, 15213',
-            status : 'Published',
-            completion : '100%',
-            link : 'www.google.com'
-        },
-        {
-            address : '1932 Josephine St, Pittsburgh PA, 15203',
-            status : 'Published',
-            completion : '100%',
-            link : 'www.google.com'
-        },
-    ]
+    reports : []
 };
 
 const allReports = (state = initialState, action) => {

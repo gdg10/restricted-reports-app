@@ -2,18 +2,8 @@ import React from "react";
 import { connect } from 'react-redux';
 import CompFormRow from './CompFormRow';
 import {
-    // ListGroup,
-    // ListGroupItem,
-    // Row,
-    // Col,
-    // Form,
-    // FormInput,
-    // FormGroup,
-    // FormCheckbox,
     Card,
-    CardHeader,
-    // FormSelect,
-    // Button
+    CardHeader
 } from "shards-react";
 
 class CompFormTable extends React.Component {
@@ -32,8 +22,8 @@ class CompFormTable extends React.Component {
                 <thead className="bg-light">
                     <tr>
                         {/* <th scope="col" className="border-0">#</th> */}
-                        <th scope="col" className="border-0">Address</th>
-                        <th scope="col" className="border-0">City</th>
+                        <th scope="col" className="border-0">Street Address</th>
+                        <th scope="col" className="border-0">City, State, ZIP</th>
                         {/* <th scope="col" className="border-0">State</th> */}
                         {/* <th scope="col" className="border-0">ZIP</th> */}
                         <th scope="col" className="border-0">Last Sold</th>

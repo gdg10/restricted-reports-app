@@ -11,9 +11,7 @@ const CompFormRow = (props) => {
             {/* COMP INFO */}
             {/* <td>{props.number + 1}</td> */}
             <td>{props.comp.address}</td>
-            <td>{props.comp.city}</td>
-            {/* <td>{props.comp.state}</td> */}
-            {/* <td>{props.comp.zip}</td> */}
+            <td>{props.comp.city + ', ' + props.comp.state + ', ' + props.comp.zip}</td>
             <td>{props.comp.lastSold}</td>
             <td>{props.comp.price}</td>
             <td>{props.comp.bedBath}</td>

@@ -1,29 +1,20 @@
 import React from "react";
 import "../utils/spin.css";
 import { Redirect } from "react-router-dom";
-import { Container, Button } from "shards-react";
-
 import {
   Row,
   Col,
   Card,
   CardHeader,
-  CardBody,
-  CardFooter,
-  Badge,
-  FormFeedback
-} from "shards-react";
-
-import {
-  ListGroupItem,
   ListGroup,
+  ListGroupItem,
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  FormInput
+  FormInput,
+  Container,
+  Button
 } from "shards-react";
-
-import PageTitle from "../components/common/PageTitle";
 
 class Landing extends React.Component {
 
