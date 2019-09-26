@@ -19,9 +19,6 @@ var AVM = 3;
 class Create extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            curView: 1
-        };
     }
 
     render() {
@@ -31,13 +28,19 @@ class Create extends Component {
                     <PageTitle sm="4" title="Create" subtitle="Report Wizard" className="text-sm-left" />
                 </Row>
 
-                {this.state.curView === SELECTION ? <Selection /> : ''}
-                {this.state.curView === COMPARATIVE ? <ReportWizard /> : ''}
-                {this.state.curView === AVM ? '' : ''}
+                {this.props.curView === SELECTION ? <Selection /> : ''}
+                {this.props.curView === COMPARATIVE ? <ReportWizard /> : ''}
+                {this.props.curView === AVM ? '' : ''}
 
             </Container>
         );
     }
 }
 
-export default Create;
+const mapStateToProps = (state) => {
+    return ({
+        curView: state.createView.view
+    });
+}
+
+export default connect(mapStateToProps)(Create);
