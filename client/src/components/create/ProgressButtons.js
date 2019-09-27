@@ -76,7 +76,7 @@ class ProgressButtons extends Component {
 
             price: "$" + rs.minVal + " - $" + rs.maxVal,
             scopeCmmnt: rs.scope + " " + rs.conditions,
-            source: rs.sources
+            sources: rs.sources
         });
     }
 
