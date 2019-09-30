@@ -75,8 +75,6 @@ class ClientForm extends React.Component {
                                                     onChange={this.handleChange}
                                                 />)
                                             }
-
-                                            <FormFeedback valid>A valid client has been added.</FormFeedback>
                                         </Col>
                                     </Row>
                                     <Row>

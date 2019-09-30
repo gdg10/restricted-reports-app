@@ -12,7 +12,6 @@ import {
   CardBody,
   ListGroup,
   ListGroupItem,
-  Button,
   Progress
 } from "shards-react";
 

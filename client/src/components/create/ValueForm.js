@@ -27,7 +27,6 @@ class ValueForm extends React.Component {
         super(props);
         this.state = {
             minVal: '',
-            maxVal: '',
             rec: ''
         }
     }
@@ -35,13 +34,11 @@ class ValueForm extends React.Component {
     handleAdd = (e) => {
         e.preventDefault();
         if (this.state.minVal != ''
-            && this.state.maxVal != ''
             && this.state.rec != '') {
             this.props.dispatch(
                 addValue(
                     {
                         minVal: this.state.minVal,
-                        maxVal: this.state.maxVal,
                         rec: this.state.rec
                     }
                 )
@@ -56,12 +53,6 @@ class ValueForm extends React.Component {
         });
     }
 
-    handleChangeMax = (e) => {
-        this.setState({
-            maxVal: e.target.value
-        });
-    }
-
     handleChangeRec = (e) => {
         this.setState({
             rec: e.target.value
@@ -70,7 +61,6 @@ class ValueForm extends React.Component {
 
     render() {
         return (
-
             <Card small className="mb-4">
                 <CardHeader className="border-bottom">
                     <h6 className="m-0">Add Value Range & Reconciliation</h6>
@@ -83,18 +73,10 @@ class ValueForm extends React.Component {
                                     <Row form>
                                         <Col md="6" className="form-group">
                                             <div className="form-group">
-                                                <label htmlFor="crt">Minimum Price</label>
+                                                <label htmlFor="crt">Point Value</label>
                                                 {this.props.locked ?
                                                     (<FormInput disabled valid value={this.props.minVal} type="number" className="form-control" id="crt"></FormInput>)
                                                     : (<FormInput type="number" onChange={this.handleChangeMin} className="form-control" id="crt"></FormInput>)}
-                                            </div>
-                                        </Col>
-                                        <Col md="6" className="form-group">
-                                            <div className="form-group">
-                                                <label htmlFor="usr">Maximum Price</label>
-                                                {this.props.locked ?
-                                                    (<FormInput type="number" valid disabled value={this.props.maxVal} className="form-control" id="usr"></FormInput>)
-                                                    : (<FormInput type="number" onChange={this.handleChangeMax} className="form-control" id="usr"></FormInput>)}
                                             </div>
                                         </Col>
                                     </Row>

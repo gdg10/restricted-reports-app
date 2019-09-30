@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux"
 import { addReport } from "../../redux/actions/allReportsActions";
 import { setView } from "../../redux/actions/CreateViewActions";
+import { Redirect } from "react-router-dom";
 
 import {
     ListGroupItem,
@@ -12,6 +13,9 @@ class ProgressButtons extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            redirect : false
+        }
     }
 
     mapReportStateToReportData(rs) {
@@ -22,7 +26,7 @@ class ProgressButtons extends Component {
             inspect: "none",
             propType: "Single Family Residential",
 
-            subjectHistory: rs.subject.subjectHistory,
+            subjectHistory: rs.subject.subjectHistory + " No other prior history avaliable.",
             owner: rs.subject.owner,
             fuel: rs.subject.fuel,
             parking: rs.subject.parking,
@@ -71,10 +75,10 @@ class ProgressButtons extends Component {
             sigInitials: 'EG',
 
             recon: rs.rec,
+            pointValue : "$" + rs.minVal,
             exposureTimeMin: rs.exposureTimeMin,
             exposureTimeMax: rs.exposureTimeMax,
 
-            price: "$" + rs.minVal + " - $" + rs.maxVal,
             scopeCmmnt: rs.scope + " " + rs.conditions,
             sources: rs.sources
         });
@@ -99,11 +103,14 @@ class ProgressButtons extends Component {
                     })
                 );
 
-                //reset create view to report selection
-                // this.props.dispatch(
-                //     setView(1)
-                // );
+                // reset create view to report selection
+                this.props.dispatch(
+                    setView(1)
+                );
             })
+            .then(res => this.setState({
+                redirect : true
+            }))
     }
 
     //CALL THE BACKEND AND REQUEST PUSH TO DATA BASE
@@ -111,8 +118,15 @@ class ProgressButtons extends Component {
         // TODO
     }
 
+    shouldRedirect = () => {
+        if(this.state.redirect === true){
+            return (<Redirect to='/reports' />)
+        }else{
+            return '';
+        }
+    }
+    
     render() {
-
         // SHOULD BUTTONS BE DISABLED? a function of progress
         var saveDisabled = this.props.progress <= 0;
         // var publishDisabled = false;
@@ -120,6 +134,7 @@ class ProgressButtons extends Component {
 
         return (
             <ListGroupItem className="d-flex px-3">
+                {this.shouldRedirect()}
 
                 {/* SAVE BUTTON */}
                 {/* {saveDisabled === true ?

@@ -24,8 +24,8 @@ class ProgressItem extends Component {
                     {this.props.completed ? "Complete" : "Incomplete"}
                 </strong>
                 
-                {/* EDIT BUTTON (show only when prompt is locked) */}
-                <a className="ml-auto" href="#" onClick={()=>{this.props.dispatch(jumpToPrompt(this.props.promptIndex))}}>{this.props.completed ? "Edit" : ''}</a>
+                {/* UNDO BUTTON (show only when prompt is locked; on click erase form data and backtrack progress) */}
+                <a className="ml-auto" href="#" onClick={()=>{this.props.dispatch(jumpToPrompt(this.props.promptIndex))}}>{this.props.completed ? "Undo" : ''}</a>
                 
             </span>
         );

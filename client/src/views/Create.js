@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
-    Alert,
     Container,
-    Row,
-    Col,
-    Button,
+    Row
 } from "shards-react";
 import PageTitle from "../components/common/PageTitle";
 import Selection from './Selection';

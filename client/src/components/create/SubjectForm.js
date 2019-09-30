@@ -113,7 +113,7 @@ class SubjectForm extends React.Component {
                             lastSold :  propData.sales[0].date,
                             price : "$" + propData.sales[0].price,
                             subjectHistory : 'n.a.',
-                            owner : 'n.a.',
+                            owner : propData.owners[0].name,
                             fuel : propData.structures[0].fuel_type,
                             parking: propData.structures[0].parking_type,
                             heating : propData.structures[0].heating_type,
@@ -122,7 +122,7 @@ class SubjectForm extends React.Component {
                             bedCount : propData.structures[0].beds_count,
                             bathCount : propData.structures[0].baths_count,
                             architecture : propData.structures[0].architecture_type,
-                            legalDes: 'n.a.',
+                            legalDes: propData.legal.apn_original,
                             mlsNumber : 'n.a.', 
                             additionalTransfers : 'n.a.',
                         }));
