@@ -33,7 +33,11 @@ class LimitingConditionsForm extends React.Component {
     handleAdd = (e) => {
         e.preventDefault();
         if (this.state.conditions.length > 0) {
-            this.props.dispatch(addConditions(this.state.conditions));
+            var newState = this.state.conditions;       // Clean the input up
+            newState.replace(/[\n\r]+/g, '');           // remove carriage returns
+            newState.replace(/\s{2,10}/g, ' ');         // remove extra spaces
+
+            this.props.dispatch(addConditions(newState));
             this.props.dispatch(incrementProgress());
         }
     }

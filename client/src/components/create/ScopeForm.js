@@ -33,7 +33,11 @@ class ScopeForm extends React.Component {
     handleAdd = (e) => {
         e.preventDefault();
         if (this.state.scope.length > 0) {
-            this.props.dispatch(addScope(this.state.scope));
+            var newState = this.state.scope;           // Clean the input up
+            newState.replace(/[\n\r]+/g, '');           // remove carriage returns
+            newState.replace(/\s{2,10}/g, ' ');         // remove extra spaces
+
+            this.props.dispatch(addScope(newState));
             this.props.dispatch(incrementProgress());
         }
     }

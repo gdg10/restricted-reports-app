@@ -22,7 +22,7 @@ class ProgressButtons extends Component {
         return ({
             client: rs.client,
 
-            subject: rs.subject.address + " " + rs.subject.address2 + ", " + rs.subject.city + ", " + rs.subject.state + ", " + rs.subject.zip,
+            subject: rs.subject.address + ", " + rs.subject.city + ", " + rs.subject.state + ", " + rs.subject.zip,
             inspect: "none",
             propType: "Single Family Residential",
 

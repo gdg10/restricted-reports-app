@@ -35,11 +35,15 @@ class ValueForm extends React.Component {
         e.preventDefault();
         if (this.state.minVal != ''
             && this.state.rec != '') {
+                var newState = this.state.rec;              // Clean the input up
+                newState.replace(/[\n\r]+/g, '');           // remove carriage returns
+                newState.replace(/\s{2,10}/g, ' ');         // remove extra spaces
+    
             this.props.dispatch(
                 addValue(
                     {
                         minVal: this.state.minVal,
-                        rec: this.state.rec
+                        rec: newState
                     }
                 )
             );
