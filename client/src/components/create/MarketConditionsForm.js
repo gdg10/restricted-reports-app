@@ -28,7 +28,13 @@ class MarketConditionsForm extends React.Component {
     handleAdd = (e) => {
         e.preventDefault();
         if (this.state.market.length > 0) {
-            this.props.dispatch(addMarket(this.state.market));
+
+            
+            var newState = this.state.market;           // Clean the input up
+            newState.replace(/[\n\r]+/g, '');           // remove carriage returns
+            newState.replace(/\s{2,10}/g, ' ');         // remove extra spaces
+
+            this.props.dispatch(addMarket(newState));   // add to store
             this.props.dispatch(incrementProgress());
         }
     }
@@ -37,6 +43,7 @@ class MarketConditionsForm extends React.Component {
         this.setState({
             market: e.target.value
         });
+
     }
 
     render() {
@@ -54,11 +61,11 @@ class MarketConditionsForm extends React.Component {
                                     <Row form>
                                         <Col md="12" className="form-group">
                                             <div className="form-group">
-                                            {
-                                                this.props.locked === true ?
-                                                    (<textarea disabled value={this.props.market} className="form-control" rows="5" id="comment"></textarea>)
-                                                    : (<textarea onChange={this.handleChange} className="form-control" rows="5" id="comment"></textarea>)
-                                            }
+                                                {
+                                                    this.props.locked === true ?
+                                                        (<textarea disabled value={this.props.market} className="form-control" rows="5" id="comment"></textarea>)
+                                                        : (<textarea onChange={this.handleChange} className="form-control" rows="5" id="comment"></textarea>)
+                                                }
                                             </div>
                                         </Col>
                                     </Row>
@@ -66,11 +73,11 @@ class MarketConditionsForm extends React.Component {
                                     {/* BUTTONS */}
                                     <Row>
                                         <Col>
-                                        {
-                                            this.props.locked === true ?
-                                                (<Button size="sm" disabled theme="success" onClick={this.handleAdd}>Add</Button>)
-                                                : (<Button size="sm" theme="success" onClick={this.handleAdd}>Add</Button>)
-                                        }
+                                            {
+                                                this.props.locked === true ?
+                                                    (<Button size="sm" disabled theme="success" onClick={this.handleAdd}>Add</Button>)
+                                                    : (<Button size="sm" theme="success" onClick={this.handleAdd}>Add</Button>)
+                                            }
                                         </Col>
                                         <Col><NavButtons /></Col>
                                     </Row>
@@ -86,7 +93,7 @@ class MarketConditionsForm extends React.Component {
 
 const mapStateToProps = (state) => {
     return ({
-        market : state.report.market
+        market: state.report.market
     });
 }
 
