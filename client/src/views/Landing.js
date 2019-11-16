@@ -17,74 +17,95 @@ import {
 } from "shards-react";
 
 class Landing extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
       backgroundImage: require("../images/shards-dashboards-logo.svg"),
-      password : '',
-      username : '',
+      password: "",
+      username: "",
       date: "29 February 2019",
-      validLogin : false,
-      firstTry : true
+      validLogin: false,
+      firstTry: true
     };
   }
 
-  handlePassChange = (e) => {
+  handlePassChange = e => {
     this.setState({
-      password : e.target.value
+      password: e.target.value
     });
-  }
+  };
 
-  handleUserChange = (e) => {
+  handleUserChange = e => {
     this.setState({
-      username : e.target.value
+      username: e.target.value
     });
-  }
+  };
 
   handleClick = () => {
-    if(this.state.password.length > 0 && this.state.username.length > 0){
+    if (
+      this.state.password === "manhattan392" &&
+      this.state.username === "egrube1969"
+    ) {
       this.setState({
-        validLogin : true,
-        firstTry : false
+        validLogin: true,
+        firstTry: false
       });
-    }else{
+    } else {
       this.setState({
-        validLogin : false,
-        firstTry : false
+        validLogin: false,
+        firstTry: false
       });
     }
-  }
+  };
 
   shouldLogin = () => {
-    if(this.state.validLogin === true){
-      return <Redirect to='/dashboard' />;
+    if (this.state.validLogin === true) {
+      return <Redirect to="/dashboard" />;
     }
     return null;
-  }
+  };
 
   render() {
-    return (//linear-gradient(to right, #00d2ff, #3a7bd5) //linear-gradient(to right, #757f9a, #d7dde8) //linear-gradient(to left, #606c88, #3f4c6b) //linear-gradient(to top, #abbaab, #ffffff) //linear-gradient(to left, #8e9eab, #eef2f3)
-      <Container fluid className="main-content-container px-4" style={{ background:"linear-gradient(to left, #8e9eab, #eef2f3)", height : '100vh', width : '100vw', position: 'relative'}}>
+    return (
+      //linear-gradient(to right, #00d2ff, #3a7bd5) //linear-gradient(to right, #757f9a, #d7dde8) //linear-gradient(to left, #606c88, #3f4c6b) //linear-gradient(to top, #abbaab, #ffffff) //linear-gradient(to left, #8e9eab, #eef2f3)
+      <Container
+        fluid
+        className="main-content-container px-4"
+        style={{
+          background: "linear-gradient(to left, #8e9eab, #eef2f3)",
+          height: "100vh",
+          width: "100vw",
+          position: "relative"
+        }}
+      >
         {this.shouldLogin()}
-        <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+        <div
+          style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)"
+          }}
+        >
           <Row>
             <Col className="text-center">
               <Card className="px-3">
-                
                 <CardHeader className="border-bottom">
                   <h6 className="m-0">Welcome to</h6>
                   <h5 className="m-0">Restricted Reports</h5>
                 </CardHeader>
 
                 <ListGroup flush>
-                  
                   <ListGroupItem className="">
-                    <img src={this.state.backgroundImage} width="100" height="100" style={{animation: 'rotation 30s infinite linear'}} />
+                    <img
+                      src={this.state.backgroundImage}
+                      width="100"
+                      height="100"
+                      style={{ animation: "rotation 30s infinite linear" }}
+                    />
                   </ListGroupItem>
-                  
+
                   <ListGroupItem className="">
-                    
                     <InputGroup seamless className="mb-3 mt-1">
                       <InputGroupAddon type="prepend">
                         <InputGroupText>
@@ -92,9 +113,22 @@ class Landing extends React.Component {
                         </InputGroupText>
                       </InputGroupAddon>
 
-                      {(this.state.validLogin === false && this.state.firstTry === false) ? (<FormInput invalid placeholder="username" id='user' onChange={this.handleUserChange} />) : 
-                      (<FormInput autoFocus placeholder="username" id='user' onChange={this.handleUserChange} />)}
-                      
+                      {this.state.validLogin === false &&
+                      this.state.firstTry === false ? (
+                        <FormInput
+                          invalid
+                          placeholder="username"
+                          id="user"
+                          onChange={this.handleUserChange}
+                        />
+                      ) : (
+                        <FormInput
+                          autoFocus
+                          placeholder="username"
+                          id="user"
+                          onChange={this.handleUserChange}
+                        />
+                      )}
                     </InputGroup>
 
                     <InputGroup seamless className="mb-3">
@@ -104,12 +138,28 @@ class Landing extends React.Component {
                         </InputGroupText>
                       </InputGroupAddon>
 
-                      {(this.state.validLogin === false && this.state.firstTry === false) ? (<FormInput invalid id='pass' type="password" placeholder="password" onChange={this.handlePassChange}/>) :
-                      (<FormInput type="password" id='pass' placeholder="password" onChange={this.handlePassChange}/>)}
+                      {this.state.validLogin === false &&
+                      this.state.firstTry === false ? (
+                        <FormInput
+                          invalid
+                          id="pass"
+                          type="password"
+                          placeholder="password"
+                          onChange={this.handlePassChange}
+                        />
+                      ) : (
+                        <FormInput
+                          type="password"
+                          id="pass"
+                          placeholder="password"
+                          onChange={this.handlePassChange}
+                        />
+                      )}
                     </InputGroup>
 
-                    <Button className="mb-1" onClick={this.handleClick}>Login</Button>
-
+                    <Button className="mb-1" onClick={this.handleClick}>
+                      Login
+                    </Button>
                   </ListGroupItem>
                 </ListGroup>
               </Card>
@@ -117,7 +167,7 @@ class Landing extends React.Component {
           </Row>
         </div>
       </Container>
-    )
+    );
   }
 }
 
