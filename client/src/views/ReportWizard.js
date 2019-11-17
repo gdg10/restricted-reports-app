@@ -34,16 +34,16 @@ const ReportWizard = (props) => (
 
           {/* RENDER THE PROMPT MATCHING: props.activePrompt */}
           {/* lock the prompt if it has been completed */}
-          {props.activePrompt === 0 ? <ClientForm locked={props.clientComplete} /> : " "}
-          {props.activePrompt === 1 ? <SubjectForm locked={props.subjectComplete} /> : " "}
-          {props.activePrompt === 2 ? <CompForm locked={props.comparablesComplete} /> : " "}
-          {props.activePrompt === 3 ? <MarketConditionsForm locked={props.marketComplete} /> : " "}
-          {props.activePrompt === 4 ? <DataSourcesForm locked={props.sourcesComplete} /> : " "}
-          {props.activePrompt === 5 ? <ExposureTimeForm locked={props.exposureComplete} /> : " "}
-          {props.activePrompt === 6 ? <ValueForm locked={props.valueComplete} /> : " "}
-          {props.activePrompt === 7 ? <DateForm locked={props.dateComplete} /> : " "}
-          {props.activePrompt === 8 ? <ScopeForm locked={props.scopeComplete} /> : " "}
-          {props.activePrompt === 9 ? <LimitingConditionsForm locked={props.conditionsComplete} /> : " "}
+          <ClientForm locked={props.clientComplete} />
+          <SubjectForm locked={props.subjectComplete} />
+          <CompForm locked={props.comparablesComplete} />
+          <MarketConditionsForm locked={props.marketComplete} />
+          <DataSourcesForm locked={props.sourcesComplete} />
+          <ExposureTimeForm locked={props.exposureComplete} />
+          <ValueForm locked={props.valueComplete} />
+          <DateForm locked={props.dateComplete} />
+          <ScopeForm locked={props.scopeComplete} />
+          <LimitingConditionsForm locked={props.conditionsComplete} />
 
         </Col>
         <Col lg="4" className="mb-4">
