@@ -12,9 +12,6 @@ import {
     Card,
     CardHeader,
     FormInput,
-    // FormGroup,
-    // FormCheckbox,
-    // FormSelect,
     FormFeedback,
     Button
 } from "shards-react";
