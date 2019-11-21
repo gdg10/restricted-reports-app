@@ -16,11 +16,11 @@ export default function() {
       htmlBefore: '<i class="material-icons">vertical_split</i>',
       to: "/reports",
     },
-    {
-      title: "Property Lookup",
-      htmlBefore: '<i class="material-icons">view_module</i>',
-      to: "/property-lookup",
-    },
+    // {
+    //   title: "Property Lookup",
+    //   htmlBefore: '<i class="material-icons">view_module</i>',
+    //   to: "/property-lookup",
+    // },
     // {
     //   title: "Add New Post",
     //   htmlBefore: '<i class="material-icons">note_add</i>',
@@ -36,11 +36,11 @@ export default function() {
     //   htmlBefore: '<i class="material-icons">table_chart</i>',
     //   to: "/tables",
     // },
-    {
-      title: "User Profile",
-      htmlBefore: '<i class="material-icons">person</i>',
-      to: "/user-profile-lite",
-    },
+    // {
+    //   title: "User Profile",
+    //   htmlBefore: '<i class="material-icons">person</i>',
+    //   to: "/user-profile-lite",
+    // },
     // {
     //   title: "Errors",
     //   htmlBefore: '<i class="material-icons">error</i>',

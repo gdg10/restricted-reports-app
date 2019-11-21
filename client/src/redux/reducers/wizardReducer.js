@@ -4,7 +4,7 @@ const PROMPT_COUNT = 10;            //ten prompts total
 const INC = 100 / PROMPT_COUNT;     //size of increment is dependent on # of prompts
 
 const initialState = {
-    progress: 0    //Default to 0%
+    progress: 20    //Default to 0%
 }
 
 const activePrompt = (state = initialState, action) => {

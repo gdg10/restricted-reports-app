@@ -12,7 +12,7 @@ const initialState = {
     marketComplete: false,
 
     conditions: '',
-    conditionsComplete: false,
+    conditionsComplete: true,
 
     sources: '',
     sourcesComplete: false,
@@ -31,7 +31,7 @@ const initialState = {
     dateComplete: false,
 
     scope: '',
-    scopeComplete: false,
+    scopeComplete: true,
 
     subjectHistory: 'n.a.',
     owner: 'n.a.',

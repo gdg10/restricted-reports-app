@@ -12,8 +12,8 @@ import CompForm from "../components/create/CompForm";
 import SubjectForm from "../components/create/SubjectForm";
 import MarketConditionsForm from "../components/create/MarketConditionsForm";
 import DataSourcesForm from "../components/create/DataSourcesForm";
-import ScopeForm from "../components/create/ScopeForm";
-import LimitingConditionsForm from "../components/create/LimitingConditionsForm";
+// import ScopeForm from "../components/create/ScopeForm";
+// import LimitingConditionsForm from "../components/create/LimitingConditionsForm";
 import ValueForm from "../components/create/ValueForm";
 import ExposureTimeForm from "../components/create/ExposureTimeForm";
 import DateForm from "../components/create/DateForm";
@@ -42,8 +42,8 @@ const ReportWizard = (props) => (
           <ExposureTimeForm locked={props.exposureComplete} />
           <ValueForm locked={props.valueComplete} />
           <DateForm locked={props.dateComplete} />
-          <ScopeForm locked={props.scopeComplete} />
-          <LimitingConditionsForm locked={props.conditionsComplete} />
+          {/* <ScopeForm locked={props.scopeComplete} /> */}
+          {/* <LimitingConditionsForm locked={props.conditionsComplete} /> */}
 
         </Col>
         <Col lg="4" className="mb-4">
