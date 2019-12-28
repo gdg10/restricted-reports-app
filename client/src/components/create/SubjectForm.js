@@ -6,12 +6,16 @@ import PropertyInput from "./PropertyInput";
 
 import {
   Card,
+  Row,
+  Col,
   CardHeader,
+  Button
 } from "shards-react";
 
 class SubjectForm extends React.Component {
   constructor(props) {
     super(props);
+    this.child = React.createRef();
     this.state = {
       streetName: "",
       curAddress2: "",
@@ -23,50 +27,13 @@ class SubjectForm extends React.Component {
     };
   }
 
-  handleStreetNumber = e => {
-    this.setState({
-      streetName: e.target.value
-    });
-  };
-
-  handleCurAddress2 = e => {
-    this.setState({
-      curAddress2: e.target.value
-    });
-  };
-
-  handleCurCity = e => {
-    this.setState({
-      curCity: e.target.value
-    });
-  };
-
-  handleCurState = e => {
-    this.setState({
-      curState: e.target.value
-    });
-  };
-
-  handleCurZip = e => {
-    this.setState({
-      curZip: e.target.value
-    });
-  };
-
-  handleCurMLS = e => {
-    this.setState({
-      curMLS: e.target.value
-    });
-  };
-
   handleSubmit = e => {
     e.preventDefault(); //block page refresh
 
-    let incomplete = //prompt is incomplete if address1, city, state, and zip are not fill out
-      this.state.streetName.length <= 0 ||
-      this.state.curCity.length <= 0 ||
-      this.state.curState.length <= 0 ||
-      this.state.curZip.length <= 0;
+    const result = this.child.current.getPropertyInput();
+    console.log(result);
+
+    let incomplete = result.isValid;
 
     if (incomplete) {
       // TODO: Error message - "Please complete form to submit"
@@ -144,14 +111,44 @@ class SubjectForm extends React.Component {
   };
   render() {
     return (
-      <React.Fragment>
         <Card small className="mb-4">
           <CardHeader className="border-bottom">
             <h6 className="m-0">Add Subject</h6>
           </CardHeader>
-          <PropertyInput />
+          <PropertyInput ref={this.child} />
+                <Row>
+                  <Col>
+                    {this.state.searching === false ? (
+                      this.props.locked === true ? (
+                        <Button
+                          size="sm"
+                          disabled
+                          theme="success"
+                          onClick={this.handleSubmit}
+                        >
+                          Add
+                        </Button>
+                      ) : (
+                        <Button
+                          size="sm"
+                          theme="success"
+                          onClick={this.handleSubmit}
+                        >
+                          Add
+                        </Button>
+                      )
+                    ) : (
+                      <Button disabled size="sm" theme="success">
+                        <span
+                          className="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                      </Button>
+                    )}
+                  </Col>
+                </Row>
           </Card>
-      </React.Fragment>
     );
   }
 }
