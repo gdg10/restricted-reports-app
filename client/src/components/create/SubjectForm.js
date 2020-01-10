@@ -45,13 +45,19 @@ class SubjectForm extends React.Component {
       fetch(
         encodeURI(
           "/api/lookup/" +
-            this.state.streetName +
+            this.result.streetNumber +
             "/" +
-            this.state.curCity +
+            this.result.preDirection +
             "/" +
-            this.state.curState +
+            this.result.streetSuffix +
             "/" +
-            this.state.curZip
+            this.result.postDirection +
+            "/" +
+            this.result.streetName +
+            "/" +
+            this.result.curCity +
+            "/" +
+            this.result.curZip
         )
       )
         .then(res => res.json())
